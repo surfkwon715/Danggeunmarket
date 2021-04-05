@@ -1,15 +1,16 @@
-import React from "react";
+import React, {useRef} from "react";
 import styled from "styled-components";
-
+import { useDispatch } from 'react-redux';
 import Signup from "./Signup";
-import LoginService from "../LoginService";
+import { loginAX } from "../redux/modules/user";
 
 
 const Login = (props) => {
-     
-    const id_ref = React.useRef(null);
-    const pwd_ref = React.useRef(null);
-    console.log(id_ref)
+  const dispatch = useDispatch();
+
+    const username_ref = useRef(null);
+    const password_ref = useRef(null);
+
 
   return (
     <React.Fragment>
@@ -18,17 +19,25 @@ const Login = (props) => {
 
         <div>
           <p style={{ fontSize: "16px", color: "#e67700" }}>아이디</p>
-                  <input type="text" ref={id_ref} width="100%" padding="2px 4px" box-sizing="border-box" border="1px solid #000000" />
+          <input type="text" ref={username_ref} width="100%" padding="2px 4px" box-sizing="border-box" border="1px solid #000000" />
         </div>
 
         <div>
           <p style={{ fontSize: "16px", color: "#e67700" }}>비밀번호</p>
-                  <input type="text" ref={pwd_ref}/>
+          <input type="text" ref={password_ref} />
         </div>
 
         <div>
           <button
-            onClick={console.log(props)}
+            onClick={() => {
+              if (username_ref.current.value === "" || password_ref.current.value === "") {
+                window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
+                return;
+              }
+              dispatch(
+                loginAX(username_ref.current.value, password_ref.current.value)
+              );
+            }}
             style={{
               fontSize: "14px",
               color: "#e67700",
@@ -44,8 +53,10 @@ const Login = (props) => {
 
         <p style={{ marginTop: "50px" }}>아직 회원이 아니신가요?</p>
         <div>
-          <button
-            onClick={Signup}
+          <button onClick={() => {
+            props.history.push("/signup");
+          }}
+            
             style={{ fontSize: "14px", color: "#e67700", marginTop: "20px", backgroundColor: "ivory", border: "1px solid #888888" }}
           >
             회원가입
