@@ -11,8 +11,8 @@ const Post =(props)=> {
     //props.is_me가 있으면 Button 보여주기
     return( 
         <React.Fragment>
-            <Grid>
-                
+            <Grid padding="32px 0" width="677px" margin="0 auto" border_bottom="1px solid #e9ecef" bg="black">
+                안녕하세요
             </Grid>
         </React.Fragment>
     )
