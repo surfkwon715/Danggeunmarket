@@ -6,9 +6,10 @@ import LoginService from "../LoginService";
 
 
 const Login = (props) => {
-
+     
     const id_ref = React.useRef(null);
     const pwd_ref = React.useRef(null);
+    console.log(id_ref)
 
   return (
     <React.Fragment>
@@ -27,7 +28,7 @@ const Login = (props) => {
 
         <div>
           <button
-            _onClick={() => LoginService}
+            onClick={console.log(props)}
             style={{
               fontSize: "14px",
               color: "#e67700",
