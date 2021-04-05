@@ -9,6 +9,8 @@ const LoginService = (props) => {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
+    console.log(props);
+    
   const Load = () => {
     axios({
       method: "post",
