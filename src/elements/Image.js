@@ -3,11 +3,13 @@ import React from 'react';
 
 const Image = (props)=>{
     //props에서 이건 받아와야한다
-    const {shape, src,size } =props;
+    const {shape, src,size,margin} =props;
     //똑같이 styles로 받아주고 밑에서 ...styles로 가져온다
     const styles ={
         src:src,
         size:size,
+       margin:margin,
+     
     }
 
     if(shape==="circle"){
@@ -54,7 +56,9 @@ const ImageCircle = styled.div`
 
  background-image: url("${(props)=>props.src}");
  background-size: cover;
- margin: 4px;
+
+ ${(props)=> (props.margin? `margin: ${props.margin};`: '')}  
+ 
 `;
 
 const ImageLogo = styled.div`
@@ -65,6 +69,7 @@ const ImageLogo = styled.div`
  background-image: url("${(props)=>props.src}");
  background-size: cover;
  
+ 
 `;
 
 
@@ -73,6 +78,7 @@ const ImageLogo = styled.div`
 const AspectOutter = styled.div`
  width: 100%;
  min-width: 250px;
+
 `;
 
 //넓이의 4:3으로 해주기 위해 75% 그러면 사진이 짤린다
@@ -82,6 +88,7 @@ const AspectInner = styled.div`
  overflow: hidden;
  background-image: url("${(props)=>props.src}");
  background-size: cover;
+
 `;
 
 
