@@ -2,7 +2,7 @@ import { React, useState } from "react";
 
 import axios from "axios";
 
-import Login from './Login';
+import Login from './pages/Login';
 
 
 const LoginService = (props) => {
@@ -11,20 +11,18 @@ const LoginService = (props) => {
 
   const Load = () => {
     axios({
-      method: "get",
+      method: "post",
       url: "http://15.165.77.77:8080/api/login",
       data: {
         username: username.current.value,
         password: password.current.value,
         },
-      
-        
     })
       .then((response) => {
         setUsername(response.data.title);
-          setPassword(response.data.contents);
-          
-          console.log(username, password);
+        setPassword(response.data.contents);
+        
+        console.log(username, password);
       })
       .catch((error) => {
         console.log(error);

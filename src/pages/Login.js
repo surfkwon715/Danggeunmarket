@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Signup from "./Signup";
-import LoginService from "./LoginService";
+import LoginService from "../LoginService";
 
 
 const Login = (props) => {
@@ -27,7 +27,7 @@ const Login = (props) => {
 
         <div>
           <button
-            _onClick={LoginService}
+            _onClick={() => LoginService}
             style={{
               fontSize: "14px",
               color: "#e67700",
