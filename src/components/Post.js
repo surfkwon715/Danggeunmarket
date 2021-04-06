@@ -16,8 +16,8 @@ const Post =(props)=> {
             <Grid center padding="12px auto" width="50px" margin="20px 20.5px"  border_bottom="1px solid #e9ecef" >
                 헤더부분
             </Grid>
-            <Container width="330px" height="120vw">
-            <ItemImage padding="10px" border_radius="20px" width="330px" height="20vw" display="flex" src="https://images.unsplash.com/photo-1593643946890-b5b85ade6451?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1529&q=80"/>
+            <Container width="400px" height="120vw">
+            <ItemImage padding="10px" border_radius="20px" width="400px" height="50vw" display="flex" src="https://images.unsplash.com/photo-1593643946890-b5b85ade6451?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1529&q=80"/>
             
             <Grid is_flex border_bottom="1px solid #e9ecef" >
             <TextWrap flex_direction="">
