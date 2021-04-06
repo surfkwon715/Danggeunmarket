@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getItemListSV } from "../redux/modules/item";
 import Image from "../elements/Image";
-import { FiHome,FiSearch,FiUser} from "react-icons/fi";
-import { FaHome } from "react-icons/fa";
-import { BiBuildings, BiLocationPlus, BiChat,BiBell } from "react-icons/bi";
-import { GoSettings } from "react-icons/go";
+import {FiSearch } from "react-icons/fi";
+import {GoSettings,GoChevronLeft } from "react-icons/go";
+import {BiBell } from "react-icons/bi";
 import Grid from "../elements/Grid";
 import axios from "axios";
 import {useState} from 'react'
@@ -17,17 +16,28 @@ import {useState} from 'react'
 
 const PostList = (props) => {
   
+    const _search =React.useRef("좋아요")
+    const text= _search.current.value;
+
   const initialState=[
     {id:1, title:"귀염", contents:"뽀짝이"}
   ]
 
   const [ResData, setData] = useState(initialState);
-  const Load =()=>{
+  
+  const Searching =()=>{
+    const text= _search.current.value;
+      console.log(text)
     axios(
       {
         method: 'get',
-        url:"http://15.165.77.77:8080/api/boards",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        url:"http://15.165.77.77:8080/api/boards/search?text="+text,
         data:{
+            
         },
       })
       .then((response)=>{
@@ -36,11 +46,14 @@ const PostList = (props) => {
       }).catch(error=>{
         console.log(error);
       })
-    }
+    };
 
-  React.useEffect(()=>{Load()
-  },[])
+    
+//   React.useEffect(()=>{Searching()}
+//   ,[])
   
+  
+ //두번 눌러야된다 함수사이클이랑 useEffect이해 
   
   
 
@@ -48,20 +61,19 @@ const PostList = (props) => {
     
    
     <Grid width="50%" margin="0px auto">
+       
+    
+       <Grid border_bottom="1px solid #e9ecef" padding="20px">
        <TextWrap padding="8px" flex_direction="row">
-       <ExtraGrid onClick={()=>{props.history.push("/search")}}>
-        <FiSearch />
-        </ExtraGrid>
+        <button onClick={()=>{props.history.push("/postlist")}}><GoChevronLeft/></button>
+       <NLInput placeholder="검색어를 입력하세요" background_color="#e2e2e2" width="800px" height="30px" ref={_search}></NLInput>
+       </TextWrap>
+       <button onClick={()=>{Searching()}}>검색하기</button>
+      </Grid>
+       
         
-        <ExtraGrid>
-        <GoSettings />
-        </ExtraGrid>
-
-        <ExtraGrid>
-        <BiBell />
-        </ExtraGrid>
+       
       
-      </TextWrap>
     
     {ResData.map((item) => {
         
@@ -84,49 +96,7 @@ const PostList = (props) => {
           })}
 
 
-
-        <Grid is_flex margin="20px 0px" border_top="2px solid #eeeeee">
-          
-          <ExtraGrid padding= "20px 20px 0px">
-            <FaHome />
-            <Text margin="10px" size="12px">
-              홈
-            </Text>
-          </ExtraGrid>
-
-          <ExtraGrid padding= "20px 20px 0px">
-            <BiBuildings />
-            <Text margin="10px" size="12px">
-              동네생활
-            </Text>
-          </ExtraGrid>
-          
-          <ExtraGrid padding= "20px 20px 0px">
-            <BiLocationPlus />
-            <Text margin="10px" size="12px">
-              내 근처
-            </Text>
-          </ExtraGrid>
-          
-          <ExtraGrid padding= "20px 20px 0px">
-            <BiChat />
-            <Text margin="10px" size="12px">
-              채팅
-            </Text>
-          </ExtraGrid>
-          
-          <ExtraGrid onClick={()=>{props.history.push("/mypage")}}  padding= "20px 20px 0px">
-            <FiUser />
-            <Text margin="10px" size="12px">
-              나의 당근
-            </Text>
-          </ExtraGrid>
-         
-        </Grid>
-      
-      <AddButton onClick={() => {props.history.push("/write")}}> + </AddButton>
-  </Grid>
- 
+    </Grid>
   );
 };
 
@@ -134,10 +104,10 @@ const ExtraGrid = styled.button`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    padding: 20px 20px 0px;
     border: none;
     background-color: white;
-    padding:${(props)=>props.padding};
+    outline:none;
 `;
 const Title = styled.h1`
   width: 90vw;
@@ -168,9 +138,18 @@ const Text = styled.p`
   ${(props) => (props.underline ? "text-decoration: underline;" : "")}
   ${(props) => (props.color ? `color: ${props.color};` : "")}
   margin: 4px 0px;
-  
+  text-align: left;
 `;
 
+const NLInput = styled.input`
+  
+  outline: none;
+  width: ${(props)=>props.width};
+  height: ${(props)=>props.height};
+  border: none;
+  background-color:${(props)=>props.background_color};
+  
+`;
 
 const AddButton = styled.button`
   position: fixed;

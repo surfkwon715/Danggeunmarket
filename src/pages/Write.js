@@ -8,10 +8,49 @@ import Image from "../elements/Image";
 import Text from "../elements/Text";
 import Button from "../elements/Button";
 
+
+import axios from "axios";
+
+
+
 const Write = (props) => {
   
-  const title_ref = React.useRef(null);
-  const contents_ref = React.useRef(null);
+  const title_ref = React.useRef("안녕");
+  const contents_ref = React.useRef("하이");
+  const fileInput = React.useRef(null)
+
+  
+  const Create =()=>{
+    axios(
+      {
+        method: 'post',
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+        url:"http://15.165.77.77:8080/api/boards",
+        data:{
+          title: title_ref.current.value,
+          contents: contents_ref.current.value,
+        },
+      })
+      .then((response)=>{
+        console.log(response.data)
+        
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
+    
+   
+      
+  const ImageUp=()=>{
+      console.log(fileInput.current)}
+
+    
+   
+
+  
 
 // 이미지 업로드  const example_ref = React.useRef(null);
 // 가격도 추가
@@ -20,14 +59,18 @@ const Write = (props) => {
     <React.Fragment>
 
       <Grid is_flex border_bottom="1px solid #e9ecef" padding="10px">
-      <pButton onClick={()=>{props.history.push("/postlist")}}>
+      
+      <pButton onClick={()=>props.history.push("/postlist")}>
         <Text size="12px">닫기</Text></pButton>
+
       <Text bold size="20px">중고거래 글쓰기</Text>
-      <pButton onClick={()=>{props.history.push("/postlist")}}>
+      
+      <pButton onClick={()=>{Create()}}>
       <Text size="12px">완료</Text></pButton>
       </Grid>
+      
       <Grid border_bottom="1px solid #e9ecef" padding="30px">
-        이미지
+        <input type="file" ref={fileInput} onClick={()=>{ImageUp()}}></input>
       </Grid>
       <Grid border_bottom="1px solid #e9ecef" padding="20px">
        <NLInput placeholder="글 제목"  width="200px" ref={title_ref}></NLInput>
@@ -47,19 +90,12 @@ const Write = (props) => {
        </NLInput>
       </Grid>
 
-
-      {/* <InputWrapper>
-        <p>예시</p>
-        <input ref={example_ref} />
-      </InputWrapper> */}
-
-      {/* 추가 버튼을 누르면 추가할 가짜데이터를 미리 꾸려볼게요. */}
      
     </React.Fragment>
   );
 };
 
-// 제목 스타일을 잡아줄 거예요.
+
 const NLInput = styled.input`
   
   outline: none;

@@ -13,6 +13,7 @@ import Write from './pages/Write';
 import MyPage from './pages/MyPage';
 import SellRecord from "./pages/SellRecord";
 import BuyRecord from "./pages/BuyRecord";
+import Search from "./pages/Search";
 
 
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/write" exact component={Write} />
 
         <Route path="/mypage" exact component={MyPage} />
+        <Route path="/search" exact component={Search} />
       
         {/* 판매내역 */}
         <Route path="/sellrecord" exact component={SellRecord} />
