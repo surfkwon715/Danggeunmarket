@@ -22,13 +22,13 @@ function App() {
       <BrowserRouter>
         <Route path="/" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
-        <Route path="/post" exact component={Post} />
+        <Route path="/post/:id" exact component={Post} />
 
         <Route path="/postlist" exact component={PostList} />
         <Route path="/write" exact component={Write} />
 
         <Route path="/mypage" exact component={MyPage} />
-
+      
         {/* 판매내역 */}
         <Route path="/sellrecord" exact component={SellRecord} />
         

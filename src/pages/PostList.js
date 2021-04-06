@@ -4,42 +4,125 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getItemListSV } from "../redux/modules/item";
 import Image from "../elements/Image";
+import { FiHome,FiUser } from "react-icons/fi";
+import { FaHome } from "react-icons/fa";
+import { BiBuildings, BiLocationPlus, BiChat } from "react-icons/bi";
+import Grid from "../elements/Grid";
+import axios from "axios";
+import {useState} from 'react'
+
+
 
 
 const PostList = (props) => {
+  
+  const initialState=[
+    {id:1, title:"귀염", contents:"뽀짝이"}
+  ]
 
+  const [ResData, setData] = useState(initialState);
+  const Load =()=>{
+    axios(
+      {
+        method: 'get',
+        url:"http://15.165.77.77:8080/api/boards",
+        data:{
+        },
+      })
+      .then((response)=>{
+        console.log(response.data)
+        setData(response.data);
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
 
- 
+  React.useEffect(()=>{Load();
+  },[])
+  
+  
+  
+
   return (
-    <React.Fragment>
-      <Title></Title>
-       {/* {item_list.map((w,index) => {
-       {item_list}
-        return (
-          <Card key={w.title} onClick={()=>{props.history.push("/post/"+index)}}>
-            <Image></Image>
-            <div>
-            
-            <Text bold>{w.title}</Text>
-            
-            <Text>{w.content}</Text>
-            
-            </div>
-          </Card>
-        );
-      })} */}
+    
+   
+    <Grid width="50%" margin="0px auto">
+    
+    {ResData.map((item) => {
+        
+            return (
+              <Card key={item.id} onClick={()=>{props.history.push("/post/"+item.id)}}>
+                
+                <Grid   border_bottom="1px solid #e9ecef">
+                <TextWrap padding="8px" flex_direction="row">
+                <Image border_radius="10px"size= {70} shape="logo"/>
+                <Grid margin="0px 0px 0px 20px">
+                <Text bold>{item.title}</Text>
+                <Text>{item.contents}</Text>
+                </Grid>
+                </TextWrap>
 
-      <AddButton
-        onClick={() => {
-          props.history.push("/write");
-        }}
-      >
-        +
-      </AddButton>
-    </React.Fragment>
+                </Grid>
+               
+              </Card>
+            );
+          })}
+
+
+
+        <Grid is_flex margin="20px 0px" border_top="2px solid #eeeeee">
+          
+          <ExtraGrid>
+            <FaHome />
+            <Text margin="10px" size="12px">
+              홈
+            </Text>
+          </ExtraGrid>
+
+          <ExtraGrid>
+            <BiBuildings />
+            <Text margin="10px" size="12px">
+              동네생활
+            </Text>
+          </ExtraGrid>
+          
+          <ExtraGrid>
+            <BiLocationPlus />
+            <Text margin="10px" size="12px">
+              내 근처
+            </Text>
+          </ExtraGrid>
+          
+          <ExtraGrid>
+            <BiChat />
+            <Text margin="10px" size="12px">
+              채팅
+            </Text>
+          </ExtraGrid>
+          
+          <ExtraGrid onClick={()=>{props.history.push("/mypage")}}>
+            <FiUser />
+            <Text margin="10px" size="12px">
+              나의 당근
+            </Text>
+          </ExtraGrid>
+         
+        </Grid>
+      
+      <AddButton onClick={() => {props.history.push("/write");}}> + </AddButton>
+  </Grid>
+ 
   );
 };
 
+const ExtraGrid = styled.button`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 0px;
+    border: none;
+    background-color: white;
+`;
 const Title = styled.h1`
   width: 90vw;
   margin: 8px auto;
@@ -57,10 +140,13 @@ const Card = styled.div`
   
 `;
 
-// 텍스트 스타일을 잡아줄거예요.
-// size라는 props가 있으면 size대로 폰트 크기를 넣어주고,
-// underline이라는 props가 있으면 밑줄을 줄거예요.(text-decoration 속성을 사용합니다.)
-// color라는 props가 있으면 color대로 텍스트 컬러를 바꿔줄거예요.
+const TextWrap = styled.div`
+  display: flex;
+  flex-direction: ${(props) =>
+    props.flex_direction === "column" ? "column" : "row"};
+    padding:${(props)=>props.padding};
+`;
+
 const Text = styled.p`
   font-size: ${(props) => (props.size ? `${props.size}` : "16px")};
   ${(props) => (props.underline ? "text-decoration: underline;" : "")}
@@ -69,11 +155,11 @@ const Text = styled.p`
   text-align: left;
 `;
 
-// 추가하기 버튼 스타일을 잡아줄거예요.
+
 const AddButton = styled.button`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 70px;
+  right: 300px;
   width: 50px;
   height: 50px;
   border-radius: 50px;
