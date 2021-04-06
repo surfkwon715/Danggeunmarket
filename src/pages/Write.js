@@ -10,43 +10,43 @@ import Button from "../elements/Button";
 
 const Write = (props) => {
   
-
-  const dispatch = useDispatch();
-
   const title_ref = React.useRef(null);
   const contents_ref = React.useRef(null);
-//   const example_ref = React.useRef(null);
 
-  const addItem = () => {
-    
-    const item = {
-      title: title_ref.current.value, 
-      contents: contents_ref.current.value,
-    };
-
-    
-    dispatch(addItemSV(item));
-    
-    
-    props.history.replace("/postlist");
-  };
-
+// 이미지 업로드  const example_ref = React.useRef(null);
+// 가격도 추가
+// 완료 누르면 데이터가 서버로 넘어가도록 + 등록이 되도록
   return (
     <React.Fragment>
-        <Grid is_flex border_bottom="1px solid #e9ecef" padding="5px">
-        <Button>닫기</Button>
-      <Text bold size="20px">중고거래 글쓰기</Text>
-      <Button>완료</Button>
-      </Grid>
-      <InputWrapper>
-        <p>글 제목</p>
-        <input ref={title_ref} />
-      </InputWrapper>
 
-      <InputWrapper>
-        <p>설명</p>
-        <input ref={contents_ref} />
-      </InputWrapper>
+      <Grid is_flex border_bottom="1px solid #e9ecef" padding="10px">
+      <pButton onClick={()=>{props.history.push("/postlist")}}>
+        <Text size="12px">닫기</Text></pButton>
+      <Text bold size="20px">중고거래 글쓰기</Text>
+      <pButton onClick={()=>{props.history.push("/postlist")}}>
+      <Text size="12px">완료</Text></pButton>
+      </Grid>
+      <Grid border_bottom="1px solid #e9ecef" padding="30px">
+        이미지
+      </Grid>
+      <Grid border_bottom="1px solid #e9ecef" padding="20px">
+       <NLInput placeholder="글 제목"  width="200px" ref={title_ref}></NLInput>
+      </Grid>
+      <Grid is_flex border_bottom="1px solid #e9ecef" padding="20px">
+       <Text>카테고리 선택</Text>
+       <pButton>></pButton>
+      </Grid>
+      <Grid is_flex border_bottom="1px solid #e9ecef" padding="20px">
+       <NLInput placeholder="가격입력(선택사항)" width="200px"></NLInput>
+       <Text><input type="checkbox"></input>가격제안받기</Text>
+      </Grid>
+      <Grid is_flex border_bottom="1px solid #e9ecef" padding="60px">
+       <NLInput type="text" ref={contents_ref} width="800px" height="100px"
+        placeholder="올릴 게시글 내용을 작성해주세요">
+
+       </NLInput>
+      </Grid>
+
 
       {/* <InputWrapper>
         <p>예시</p>
@@ -54,44 +54,21 @@ const Write = (props) => {
       </InputWrapper> */}
 
       {/* 추가 버튼을 누르면 추가할 가짜데이터를 미리 꾸려볼게요. */}
-      <pButton onClick={()=>{addItem()}}>추가하기</pButton>
+     
     </React.Fragment>
   );
 };
 
 // 제목 스타일을 잡아줄 거예요.
-const Title = styled.h1`
-  width: 90vw;
-  margin: 8px auto;
+const NLInput = styled.input`
+  
+  outline: none;
+  width: ${(props)=>props.width};
+  height: ${(props)=>props.height};
+  border: none;
+  
 `;
 
-// input이 들어갈 부분을 감싸줄거예요. 배경색도 흰색으로 줘볼게요!
-// 이 div 아래에 있는 p 태그에 접근할 때는 & > p로 접근할 수 있어요.
-// 이 div 아래에 있는 input 태그에 접근할 때는 & > input으로 접근할 수 있어요.
-const InputWrapper = styled.div`
-  width: 90vw;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 16px;
-  margin: 8px auto;
-  box-sizing: border-box;
-  background-color: #ffffff;
-  & > p {
-    text-decoration: underline;
-    font-size: 8px;
-    color: #888888;
-    margin: 4px 0px;
-  }
-
-  & > input {
-    border: 1px solid #000000;
-    width: 100%;
-    padding: 2px 4px;
-    margin: 4px 0px;
-    box-sizing: border-box;
-  }
-`;
 
 // 추가하기 버튼 스타일을 잡아줄거예요.
 const pButton = styled.button`
