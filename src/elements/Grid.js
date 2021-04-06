@@ -6,18 +6,18 @@ import styled from "styled-components";
 
 const Grid =(props)=>{
     //prop로 설정해준 값을 가져와야한다
-    const {is_flex,width,margin,padding,bg,children,border_bottom} = props;
+    const {is_flex,width,margin,padding,bg,children,border_bottom, border_top} = props;
     //styles 변수 생성
     const styles = {
-        is_flex: is_flex,
-        width: width,
-        margin: margin,
-        padding: padding,
-        bg:bg,
-       
-        border_bottom:border_bottom,
-        
-    }
+      is_flex: is_flex,
+      width: width,
+      margin: margin,
+      padding: padding,
+      bg: bg,
+
+      border_bottom: border_bottom,
+      border_top: border_top,
+    };
     
     //원래 props라고 써야하는 부분을 styles 변수를 만들어서 객체형으로 전달해준다
     return (<React.Fragment>
@@ -27,28 +27,29 @@ const Grid =(props)=>{
     </React.Fragment>);
 }
 // 기본으로 들어오는 props값
-Grid.defaultProps={
-    children: null,
-    is_flex: false,
-    width: "100%",
-    padding: false,
-    margin: false,
-    bg: false,
-    
-    border_bottom: false,
-    
-}
+Grid.defaultProps = {
+  children: null,
+  is_flex: false,
+  width: "100%",
+  padding: false,
+  margin: false,
+  bg: false,
+
+  border_bottom: false,
+  border_top: false,
+};
 // Grid Box 컴포넌트 + props에서 데이터 받아오는 형식(있을 수도 있고 없을 수도 있는 것 표현) 
-const GridBox = styled.div`           
-    width: ${(props)=> props.width},
-    height: 100%;
-    box-sizing: border-box;
-    ${(props)=> (props.padding? `padding: ${props.padding};`: '')}   
-    ${(props)=> (props.margin? `margin: ${props.margin};`: '')}
-    ${(props)=> (props.bg? `bg: ${props.bg};`: '')}
-    ${(props)=> (props.is_flex? `display: flex; align-items: center; justify-content: space-between;`: '')}
+const GridBox = styled.div`
+  width: ${(props) => props.width};
+  height: 100%;
+  box-sizing: border-box;
+  ${(props) => (props.padding ? `padding: ${props.padding};` : "")}
+  ${(props) => (props.margin ? `margin: ${props.margin};` : "")}
+    ${(props) => (props.bg ? `bg: ${props.bg};` : "")}
+    ${(props) => (props.is_flex ? `display: flex; align-items: center; justify-content: space-between;` : "")}
     
-    ${(props)=> (props.border_bottom? `border-bottom: ${props.border_bottom};`: '')}
+    ${(props) => (props.border_bottom ? `border-bottom: ${props.border_bottom};` : "")}
+    ${(props) => (props.border_top ? `border-top: ${props.border_top};` : "")}
 `; //선굵기까지 width에 전부 포함한다 //CSS 안에서 변수선언 시 $를 사용한다 + 스타일드 컴포넌트 내에서 props 사용하려면 arrow func써야한다
                       
 export default Grid;

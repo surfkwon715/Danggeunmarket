@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
@@ -6,6 +5,9 @@ import Login from './pages/Login';
 
 import Signup from './pages/Signup';
 import Post from './components/Post';
+import MyPage from './pages/MyPage';
+import SellRecord from "./pages/SellRecord";
+import BuyRecord from "./pages/BuyRecord";
 
 
 function App() {
@@ -15,6 +17,14 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/post" exact component={Post} />
+        <Route path="/mypage" exact component={MyPage} />
+
+        {/* 판매내역 */}
+        <Route path="/sellrecord" exact component={SellRecord} />
+        
+        {/* 구매내역 */}
+        <Route path="/buyrecord" exact component={BuyRecord} />
+
       </BrowserRouter>
     </React.Fragment>
 

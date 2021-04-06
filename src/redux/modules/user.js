@@ -1,9 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
-// import { setCookie, getCookie, deleteCookie } from "../../shared/Cookie";
-
 import axios from "axios";
+
 
 
 
@@ -27,61 +26,73 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 
 
 
-//서버에서 유저정보 받아오기 (로그인)
+//서버에서 유저정보 보내고 받아오기 (로그인)
 export const loginAX = (username, password) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .post("http://15.165.77.77:8080/api/login", {
+        username: username,
+        password: password,
+      })
 
-  return function (dispatch, {history}) {
+      //res = 서버에서 주는 token (JWT)
+      .then((res) => {
+        console.log(res);
 
-    //로그인 input값 전달하고 나서 서버에서 토큰을 받아올때
-    //쿼리에 넣어 받아옴
-    axios.get("http://15.165.77.77:8080/api/login")
-      
-      .then((user) => {
-        console.log(user);
+        sessionStorage.setItem("token", res.data.token);
 
-        dispatch(
-          setUser({
-            username: username,
-            password: password,
-          })
-        );
+        // axios.get("", config).then((res) => {
+        //   let userInfo = {
+        //     username: res.data.data.username,
+        //     password: res.data.data.password,
+        //   };
+        // });
+
+        // dispatch(
+        //   setUser({
+        //     username: username,
+        //     password: password,
+        //   })
+        // );
 
         history.push("/");
-    })
+      })
 
-    .catch((error) => {
-     alert(error.errorMessage);
-    })
+      .catch((error) => {
+                console.log("에러발생!", error);
+
+      });
+
+    // axios
+    //   .post("http://13.209.10.75/api/login", {
+    //     token: sessionStorage.getItem("token"),
+    //   })
+
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((error) => {});
   };
 };
 
 
 
 //서버에 유저정보 추가 (회원가입)
-export const SignupAX = (username, password, pwCheck, email) => {
+export const SignupAX = (username, password, pwcheck, email) => {
+  return function (dispatch, getState, { history }) {
+    axios
+      .post("http://15.165.77.77:8080/api/signup", { username: username, password: password, pwcheck: pwcheck, email: email })
+      .then(() => {
+        console.log("성공!")
 
-  return function (dispatch, { history }) {
-        let _user = {
-            username: username,
-            password: password,
-            pwCheck: pwCheck,
-            email: email,
-        }
-        
-      axios.post("http://15.165.77.77:8080/api/signup", {
-        ..._user
+        //dispatch(setUser({ _user }));
+
+  
       })
-        .then(() => {
-          dispatch(
-            setUser({ _user })
-          );
-
-          history.push("/");
-        })
-        .catch((error) => {
-          alert(error.errorMessage);
-        });
-    };
+      .catch((error) => {
+        console.log("에러발생!", error);
+      });
+  };
 };
 
 
@@ -97,7 +108,7 @@ export default handleActions(
         draft.is_login = true;
       }),
     
-    //GET_USER는 아무것도 안해줘도 되나(?)
+    //GET_USER는 아무것도 안해주는지(?)
     [GET_USER]: (state, action) => produce(state, (draft) => {
 
     })
