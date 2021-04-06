@@ -48,10 +48,10 @@ const Signup = (props) => {
                 return;
               }
 
-              if (!emailCheck(username_ref.current.value)) {
-                window.alert('이메일 형식이 맞지 않습니다!');
-                return;
-              }
+              // if (!emailCheck(username_ref.current.value)) {
+              //   window.alert('이메일 형식이 맞지 않습니다!');
+              //   return;
+              // }
 
               if (password_ref.current.value !== pwd_check_ref.current.value) {
                 window.alert("패스워드와 패스워드 확인이 일치하지 않습니다!");
@@ -59,7 +59,11 @@ const Signup = (props) => {
               }
 
               dispatch(
-                SignupAX(username_ref.current.value, password_ref.current.value, pwd_check_ref.current.value, email_ref.current.value)
+                SignupAX(username_ref.current.value,
+                  password_ref.current.value,
+                  pwd_check_ref.current.value,
+                  email_ref.current.value
+                )
               );
             }}
 

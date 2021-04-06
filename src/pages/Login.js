@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import Signup from "./Signup";
 import { loginAX } from "../redux/modules/user";
 
+import { Grid, Text } from '../elements';
+
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -15,19 +17,19 @@ const Login = (props) => {
   return (
     <React.Fragment>
       <InputWrapper>
-        <p style={{ fontSize: "20px", fontWeight: "bold", color: "#e67700" }}>당근마켓에 오신것을 환영합니다!</p>
+        <Text size="20px" color= "#e67700" bold>로그인</Text>
 
-        <div>
-          <p style={{ fontSize: "16px", color: "#e67700" }}>아이디</p>
+        <Grid>
+          <Text size="16px" color="#e67700">아이디</Text>
           <input type="text" ref={username_ref} width="100%" padding="2px 4px" box-sizing="border-box" border="1px solid #000000" />
-        </div>
+        </Grid>
 
-        <div>
-          <p style={{ fontSize: "16px", color: "#e67700" }}>비밀번호</p>
+        <Grid>
+          <Text size="16px" color="#e67700">비밀번호</Text>
           <input type="text" ref={password_ref} />
-        </div>
+        </Grid>
 
-        <div>
+        <Grid>
           <button
             onClick={() => {
               if (username_ref.current.value === "" || password_ref.current.value === "") {
@@ -49,7 +51,7 @@ const Login = (props) => {
           >
             로그인
           </button>
-        </div>
+        </Grid>
 
         <p style={{ marginTop: "50px" }}>아직 회원이 아니신가요?</p>
         <div>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const Button = (props)=>{
 
     const {text, _onClick,is_float,children,margin,width,padding}=props;
@@ -21,8 +22,6 @@ const Button = (props)=>{
     return(
         <ElButton {...styles} onClick={_onClick}>{text? text: children}</ElButton>         // 로그인 js에서  _onClick={()=>{console.log("로그인 했어!");}} 이 값을 props로 내려주면 클릭하면 이 함수 실행되도록 했다
     )
-
-    
 }
 
 Button.defaultProps={
@@ -49,9 +48,11 @@ const ElButton = styled.button`
 
 const FloatButton = styled.button`
     width: 50px;
+
     heights: 50px;
     background-color: #212121;
     color: #ffffff;
+
 
     box-sizing: border-box;
     font-size: 36px;
@@ -60,9 +61,11 @@ const FloatButton = styled.button`
     bottom: 50px;
     right: 16px;
     text-align: center;
+
     border: none;
     border-radius: 50px;
     vertical-align: middle;
 `;
 
 export default Button;
+
