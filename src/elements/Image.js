@@ -3,12 +3,13 @@ import React from 'react';
 
 const Image = (props)=>{
     //props에서 이건 받아와야한다
-    const {shape, src,size,margin} =props;
+    const {shape, src,size,margin,border_radius} =props;
     //똑같이 styles로 받아주고 밑에서 ...styles로 가져온다
     const styles ={
         src:src,
         size:size,
        margin:margin,
+       border_radius:border_radius
      
     }
 
@@ -68,8 +69,7 @@ const ImageLogo = styled.div`
  
  background-image: url("${(props)=>props.src}");
  background-size: cover;
- 
- 
+ border-radius: ${(props)=>props.border_radius};
 `;
 
 
