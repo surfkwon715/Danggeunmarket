@@ -58,7 +58,7 @@ const ElButton = styled.button`
 const FloatButton = styled.button`
     width: 50px;
 
-    heights: 50px;
+    height: 50px;
     background-color: #212121;
     color: #ffffff;
 

@@ -28,7 +28,7 @@ const Signup = (props) => {
             style={{
               width: "400px",
               height: "10px",
-              borderBottom: "1.3px solid #495057",
+              borderBottom: "1.2px solid #495057",
               marginBottom: "30px",
             }}
           ></div>
@@ -40,13 +40,13 @@ const Signup = (props) => {
             <input
               type="text"
               ref={username_ref}
-              placeholder="영문, 숫자 포함"
+              placeholder="영문, 숫자를 포함하세요"
               style={{
                 width: "200px",
                 height: "40px",
                 padding: "2px 10px",
                 fontSize: "11px",
-                color: "#ced4da",
+                color: "#495057",
                 boxSizing: "border-box",
                 border: "1px solid #dee2e6",
               }}
@@ -61,6 +61,7 @@ const Signup = (props) => {
                 backgroundColor: "#ffffff",
                 border: "1px solid #d9480f",
                 textAlign: "center",
+                cursor: "pointer",
               }}
               onClick={() => {
                 CheckUserName(username_ref.current.value);
@@ -79,13 +80,13 @@ const Signup = (props) => {
             <input
               type="text"
               ref={password_ref}
-              placeholder="영문, 숫자, 특수문자 포함"
+              placeholder="영문, 숫자, 특수문자를 포함하세요"
               style={{
                 width: "200px",
                 height: "40px",
                 padding: "2px 10px",
                 fontSize: "11px",
-                color: "#ced4da",
+                color: "#495057",
                 boxSizing: "border-box",
                 border: "1px solid #dee2e6",
               }}
@@ -101,7 +102,7 @@ const Signup = (props) => {
                 textAlign: "center",
               }}
               onClick={() => {
-                CheckUserName(username_ref.current.value);
+                CheckUserName(password_ref.current.value);
               }}
             ></div>
           </div>
@@ -112,14 +113,14 @@ const Signup = (props) => {
             </Text>
             <input
               type="text"
-              ref={password_ref}
-              placeholder="비밀번호를 한번 더 입력"
+              ref={pwd_check_ref}
+              placeholder="비밀번호를 한번 더 입력하세요"
               style={{
                 width: "200px",
                 height: "40px",
                 padding: "2px 10px",
                 fontSize: "11px",
-                color: "#ced4da",
+                color: "#495057",
                 boxSizing: "border-box",
                 border: "1px solid #dee2e6",
               }}
@@ -135,7 +136,7 @@ const Signup = (props) => {
                 textAlign: "center",
               }}
               onClick={() => {
-                CheckUserName(username_ref.current.value);
+                CheckUserName(pwd_check_ref.current.value);
               }}
             ></div>
           </div>
@@ -146,14 +147,14 @@ const Signup = (props) => {
             </Text>
             <input
               type="text"
-              ref={password_ref}
+              ref={email_ref}
               placeholder="예: danggeun@market.com"
               style={{
                 width: "200px",
                 height: "40px",
                 padding: "2px 10px",
                 fontSize: "11px",
-                color: "#ced4da",
+                color: "#495057",
                 boxSizing: "border-box",
                 border: "1px solid #dee2e6",
               }}
@@ -169,7 +170,7 @@ const Signup = (props) => {
                 textAlign: "center",
               }}
               onClick={() => {
-                CheckUserName(username_ref.current.value);
+                CheckUserName(email_ref.current.value);
               }}
             ></div>
           </div>

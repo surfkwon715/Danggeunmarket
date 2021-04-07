@@ -5,7 +5,6 @@ import { SellRecordHeader } from '../components/Header';
 
 const SellRecord = (props) => {
 
-
   return (
     <React.Fragment>
 
@@ -18,9 +17,6 @@ const SellRecord = (props) => {
     </React.Fragment>
   );
 }
-
-
-
 
 
 SellRecord.defaultProps = {

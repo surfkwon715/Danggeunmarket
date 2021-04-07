@@ -15,77 +15,73 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <OutterBox>
-        <InputWrapper>
-          <Text size="22px" color="#d9480f" margin="0 auto 20px" bold>
+      <InputWrapper>
+        <Text size="22px" color="#d9480f" margin="0 auto 20px" bold>
+          로그인
+        </Text>
+
+        <ExtraGrid>
+          <input
+            type="text"
+            placeholder="아이디"
+            ref={username_ref}
+            style={{
+              width: "250px",
+              height: "40px",
+              padding: "2px 10px",
+              fontSize: "12px",
+              color: "#495057",
+              boxSizing: "border-box",
+              border: "1px solid #dee2e6",
+            }}
+          />
+        </ExtraGrid>
+
+        <ExtraGrid>
+          <input
+            type="text"
+            placeholder="비밀번호"
+            ref={password_ref}
+            style={{
+              width: "250px",
+              height: "40px",
+              padding: "2px 10px",
+              fontSize: "12px",
+              color: "#495057",
+              boxSizing: "border-box",
+              border: "1px solid #dee2e6",
+            }}
+          />
+        </ExtraGrid>
+
+        <MiniText>아이디/비밀번호 찾기</MiniText>
+
+        <ExtraGrid>
+          <ButtonStyle
+            onClick={() => {
+              if (username_ref.current.value === "" || password_ref.current.value === "") {
+                window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
+                return;
+              }
+              dispatch(loginAX(username_ref.current.value, password_ref.current.value));
+              props.history.push("/postlist");
+            }}
+          >
             로그인
-          </Text>
+          </ButtonStyle>
+        </ExtraGrid>
 
-          <ExtraGrid>
-            <input
-              type="text"
-              placeholder="아이디"
-              ref={username_ref}
-              style={{
-                width: "250px",
-                height: "40px",
-                padding: "2px 10px",
-                fontSize: "12px",
-                color: "#ced4da",
-                boxSizing: "border-box",
-                border: "1px solid #dee2e6",
-              }}
-            />
-          </ExtraGrid>
-
-          <ExtraGrid>
-            <input
-              type="text"
-              placeholder="비밀번호"
-              ref={password_ref}
-              style={{
-                width: "250px",
-                height: "40px",
-                padding: "2px 10px",
-                fontSize: "12px",
-                color: "#ced4da",
-                boxSizing: "border-box",
-                border: "1px solid #dee2e6",
-              }}
-            />
-          </ExtraGrid>
-
-          <MiniText> 
-            아이디/비밀번호 찾기
-          </MiniText>
-
-          <ExtraGrid>
-            <ButtonStyle
-              onClick={() => {
-                if (username_ref.current.value === "" || password_ref.current.value === "") {
-                  window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
-                  return;
-                }
-                dispatch(loginAX(username_ref.current.value, password_ref.current.value));
-                props.history.push("/postlist");
-              }}
-            >
-              로그인
-            </ButtonStyle>
-          </ExtraGrid>
-
-          <div>
-            <ButtonStyle
-              onClick={() => {
-                props.history.push("/signup");
-              }}
-              style={{ fontSize: "12px", color: "#ffffff", backgroundColor: "#e67700", border: "none" }}
-            >
-              회원가입
-            </ButtonStyle>
-          </div>
-        </InputWrapper>
-      </OutterBox>
+        <div>
+          <ButtonStyle
+            onClick={() => {
+              props.history.push("/signup");
+            }}
+            style={{ fontSize: "12px", color: "#ffffff", backgroundColor: "#e67700", border: "none" }}
+          >
+            회원가입
+          </ButtonStyle>
+        </div>
+      </InputWrapper>
     </React.Fragment>
   );
 };
@@ -122,22 +118,16 @@ const ButtonStyle = styled.button`
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
   cursor: pointer;
+  font-weight: bold;
 `;
-
-const OutterBox = styled.div`
-  border: 1px solid #adb5bd;
-`;
-
 
 const MiniText = styled.div`
   font-size: 11px;
   color: #adb5bd;
   text-decoration: underline;
   text-align: right;
-  margin-top: 20px;
+  margin-top: 30px;
   cursor: pointer;
 `;
-
-
 
 export default Login;
