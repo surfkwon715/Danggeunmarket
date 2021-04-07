@@ -2,7 +2,8 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 
 import axios from "axios";
-
+import { SellRecordHeader } from '../../components/Header';
+import { history } from '../configStore';
 
 
 
@@ -28,40 +29,50 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 
 //서버에서 유저정보 보내고 받아오기 (로그인)
 export const loginAX = (username, password) => {
-  return function (dispatch, getState, { history }) {
-    axios
-      .post("http://15.165.77.77:8080/api/login", {
+  return function (dispatch, getState) {
+
+    fetch("http://15.165.77.77:8080/api/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
         username: username,
         password: password,
       })
+    })
+      .then((res) => res.json())
+      .then((token) => {
+        console.log(token);
+        localStorage.setItem("jwt", token.accessToken);
+        // alert("로그인 되었습니다");
+      });
 
-      //res = 서버에서 주는 token (JWT)
-      .then((res) => {
-        console.log(res);
 
-        sessionStorage.setItem("token", res.data.token);
 
-        // axios.get("", config).then((res) => {
-        //   let userInfo = {
-        //     username: res.data.data.username,
-        //     password: res.data.data.password,
-        //   };
-        // });
+    // axios
+    //   .post("", {
+    //     username: username,
+    //     password: password,
+    //   })
 
-        // dispatch(
-        //   setUser({
-        //     username: username,
-        //     password: password,
-        //   })
-        // );
+    //   //res = 서버에서 주는 token (JWT)
+    //   .then((res) => {
+    //     console.log(res);
+
+    //     sessionStorage.setItem("token", res.data.token);
+
+      
+        //리덕스에 보내기
+        dispatch(
+          setUser({
+            username: username,
+            password: password,
+          })
+        );
 
         history.push("/");
-      })
-
-      .catch((error) => {
-                console.log("에러발생!", error);
-
-      });
+      }
 
     // axios
     //   .post("http://13.209.10.75/api/login", {
@@ -73,32 +84,111 @@ export const loginAX = (username, password) => {
     //   })
     //   .catch((error) => {});
   };
-};
+
 
 
 
 //서버에 유저정보 추가 (회원가입)
 export const SignupAX = (username, password, pwcheck, email) => {
-  return function (dispatch, getState, { history }) {
-    axios
-      .post("http://15.165.77.77:8080/api/signup", { username: username, password: password, pwcheck: pwcheck, email: email })
-      .then(() => {
-        console.log("성공!")
+  return function (dispatch, getState) {
 
-        //dispatch(setUser({ _user }));
+        fetch("http://15.165.77.77:8080/api/signup", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+
+          body: JSON.stringify({
+            username: username,
+            password: password,
+            pwcheck: pwcheck,
+            email: email,
+          }),
+
+        })
+          .then((res) => res.json())
+          .then((token) => {
+            localStorage.setItem("jwt", token.accessToken);
+            alert("회원가입 되었습니다");
+          });
+
+    // axios
+    //   .post("http://15.165.77.77:8080/api/signup", { username: username, password: password, pwcheck: pwcheck, email: email }, SellRecordHeader)
+    //   .then(() => {
+    //     console.log("성공!")
+
+    //     //dispatch(setUser({ _user }));
 
   
-      })
-      .catch((error) => {
-        console.log("에러발생!", error);
-      });
+    //   })
+    //   .catch((error) => {
+    //     console.log("에러발생!", error);
+    //   });
   };
 };
 
 
-// Reducer 함수 (## 리듀서에 default가 붙음!)
-// 1항 - 갈아끼울 state(initialState), 2항 - state를 갈아끼우기 위한 action
-// (action은 dictionary 형태 - key:value)
+export const InfoAX = () => {
+  fetch('/info',{
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('jwt'),
+        }
+    }).then(res => res.json())
+        .then(json => alert('이름 : ' + json.name + ', 비밀번호 : ' + json.pwd))
+}
+
+
+
+
+export const InfoImageAX = () => {
+  fetch("/info", {
+    method: "POST",
+    headers: {
+      "content-type": "multipart/form-data",
+      "Authorization": "Bearer " + localStorage.setItem('jwt'),
+    }
+  }).then(res => res.json())
+  .then(res => alert())
+
+  };
+
+
+
+export const CheckUserName = (username) => {
+
+console.log(username);
+
+    fetch("http://15.165.77.77:8080/api/checkusername", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log("성공!");
+          alert("사용가능한 아이디입니다.");
+        } else {
+          console.log("실패!");
+          alert("중복되는 아이디입니다.");
+        }
+      });
+  };
+
+
+
+
+
+//Reducer 함수 (## 리듀서에 default가 붙음!)
+//1항 - 갈아끼울 state(initialState), 2항 - state를 갈아끼우기 위한 action
+//(action은 dictionary 형태 -)
 export default handleActions(
   {
     [SET_USER]: (state, action) => 
@@ -119,6 +209,8 @@ export default handleActions(
 const ActionCreators = {
   loginAX,
   SignupAX,
+  InfoAX,
+  CheckUserName,
 };
 
 export { ActionCreators };

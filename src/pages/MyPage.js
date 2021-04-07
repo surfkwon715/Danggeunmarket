@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Text, Image, Button } from '../elements';
 import { FiSettings, FiCrosshair, FiTag, FiGrid, FiBookOpen, FiHome } from "react-icons/fi";
-import { FaRegNewspaper, FaShoppingBag, FaHeart, FaMapMarkerAlt, FaMapMarker, FaUser } from "react-icons/fa";
+import { FaRegNewspaper, FaShoppingBag, FaHeart, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { BiCommentDetail, BiBuildings, BiLocationPlus, BiChat } from "react-icons/bi";
+import UserInfo from './UserInfo';
+
 
 
 const MyPage = (props) => {
-
-
 
     return (
       <React.Fragment>
@@ -33,65 +33,89 @@ const MyPage = (props) => {
           </Grid>
 
           <ExtraGrid>
-            <Button width="90%" margin="10px auto">
+            <Button onClick={() => {
+              props.history.push("/info")
+            }} width="90%" margin="10px auto">
               프로필 보기
             </Button>
           </ExtraGrid>
 
           <Grid is_flex padding="10px" border_bottom="3px solid #eeeeee">
             <ExtraGrid>
-              <FaRegNewspaper />
-              <Text size="13px" margin="10px 0px">
-                판매내역
-              </Text>
+              <Button border="none">
+                <FaRegNewspaper />
+                <Text size="13px" margin="10px 0px">
+                  판매내역
+                </Text>
+              </Button>
             </ExtraGrid>
+
             <ExtraGrid>
-              <FaShoppingBag />
-              <Text size="13px" margin="10px 0px">
-                구매내역
-              </Text>
+              <Button border="none">
+                <FaShoppingBag />
+                <Text size="13px" margin="10px 0px">
+                  구매내역
+                </Text>
+              </Button>
             </ExtraGrid>
+
             <ExtraGrid>
-              <FaHeart />
-              <Text size="13px" margin="10px 0px">
-                관심목록
-              </Text>
+              <Button border="none">
+                <FaHeart />
+                <Text size="13px" margin="10px 0px">
+                  관심목록
+                </Text>
+              </Button>
             </ExtraGrid>
           </Grid>
 
           <Grid>
             <Grid is_flex padding="20px">
               <FaMapMarkerAlt />
-              <Text>내 동네 설정</Text>
+              <Grid is_flex margin="0px 20px">
+                <Text>내 동네 설정</Text>
+              </Grid>
             </Grid>
             <Grid is_flex padding="20px">
               <FiCrosshair />
-              <Text>동네 인증하기</Text>
+              <Grid is_flex margin="0px 20px">
+                <Text>동네 인증하기</Text>
+              </Grid>
             </Grid>
             <Grid is_flex padding="20px">
               <FiTag />
-              <Text>키워드 알림</Text>
+              <Grid is_flex margin="0px 20px">
+                <Text>키워드 알림</Text>
+              </Grid>
             </Grid>
             <Grid is_flex padding="20px" border_bottom="3px solid #eeeeee">
               <FiGrid />
-              <Text>모아보기</Text>
+              <Grid is_flex margin="0px 20px">
+                <Text>모아보기</Text>
+              </Grid>
             </Grid>
             <Grid is_flex padding="20px">
               <FiBookOpen />
-              <Text>동네생활 글</Text>
+              <Grid is_flex margin="0px 20px">
+                <Text>동네생활 글</Text>
+              </Grid>
             </Grid>
             <Grid is_flex padding="20px">
               <BiCommentDetail />
-              <Text>동네생활 댓글</Text>
+              <Grid is_flex margin="0px 20px">
+                <Text>동네생활 댓글</Text>
+              </Grid>
             </Grid>
           </Grid>
 
           <Grid is_flex margin="20px 0px" border_top="2px solid #eeeeee">
             <ExtraGrid>
-              <FiHome />
-              <Text margin="10px" size="12px">
-                홈
-              </Text>
+              <Button border="none" onClick={() => props.history.push('/')}>
+                <FiHome />
+                <Text margin="10px" size="12px">
+                  홈
+                </Text>
+              </Button>
             </ExtraGrid>
             <ExtraGrid>
               <BiBuildings />
@@ -129,8 +153,6 @@ const ExtraGrid = styled.div`
     align-items: center;
     padding: 20px 20px 0px;
 `;
-
-
 
 
 export default MyPage;
