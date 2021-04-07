@@ -140,6 +140,22 @@ export const InfoAX = () => {
 }
 
 
+
+
+export const InfoImageAX = () => {
+  fetch("/info", {
+    method: "POST",
+    headers: {
+      "content-type": "multipart/form-data",
+      "Authorization": "Bearer " + localStorage.setItem('jwt'),
+    }
+  }).then(res => res.json())
+  .then(res => alert())
+
+  };
+
+
+
 export const CheckUserName = (username) => {
 
 console.log(username);
@@ -165,8 +181,6 @@ console.log(username);
         }
       });
   };
-
-
 
 
 

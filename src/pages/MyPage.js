@@ -33,7 +33,9 @@ const MyPage = (props) => {
           </Grid>
 
           <ExtraGrid>
-            <Button onClick={UserInfo}width="90%" margin="10px auto">
+            <Button onClick={() => {
+              props.history.push("/info")
+            }} width="90%" margin="10px auto">
               프로필 보기
             </Button>
           </ExtraGrid>
@@ -108,7 +110,7 @@ const MyPage = (props) => {
 
           <Grid is_flex margin="20px 0px" border_top="2px solid #eeeeee">
             <ExtraGrid>
-              <Button border="none">
+              <Button border="none" onClick={() => props.history.push('/')}>
                 <FiHome />
                 <Text margin="10px" size="12px">
                   홈

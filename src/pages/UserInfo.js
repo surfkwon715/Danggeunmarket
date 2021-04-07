@@ -1,63 +1,93 @@
-import React from 'react';
-import { Grid, Text, Image } from '../elements';
+import React, {useState} from 'react';
+import styled from 'styled-components';
+import { Grid, Text, Image, Button } from '../elements';
 import { FaRegHeart } from 'react-icons/fa';
 import { GoComment } from 'react-icons/go';
 
 
 
+
+
+
+
+
+
+
 const UserInfo = (props) => {
+  const [fileUrl, setFileUrl] = useState(null);
+
+  const processImage = (event) => {
+    const imageFile = event.target.files[0];
+    const imageUrl = URL.createObjectURL(imageFile);
+    setFileUrl(imageUrl);
+  };
     return (
       <React.Fragment>
-        <Grid>
-          <Grid is_flex>
-            <Image shape="circle" margin="10px" />
-            <Grid>
-              <Text size="15px" bold>
-                Cheryl
-              </Text>
-              <Text size="11px" color="#868e96">
-                #0
-              </Text>
-            </Grid>
-          </Grid>
+        <Grid width="50%" margin="10px auto">
+          <ImgGrid>
+            <Image src={fileUrl} shape="circle" size="120" />
+          </ImgGrid>
+          <UploadGrid>
+            <Text margin="10px 20px" bold>
+              프로필 사진 바꾸기
+            </Text>
+            <form action="/home/uploadfiles" method="post" enctype="multipart/form-data">
+              <label
+                className="input-file-button"
+                for="input-file"
+                style={{
+                  fontSize: "13px",
+                  backgroundColor: "#000000",
+                  color: "#ffffff",
+                  borderRadius: "20px",
+                  padding: "8px 16px",
+                  cursor: "pointer",
+                }}
+              >
+                업로드
+              </label>
+              <input type="file" id="input-file" accept="image/*" onChange={processImage} style={{ display: "none" }} />
+            </form>
+          </UploadGrid>
 
-          <Grid margin="20px">
-            <Text>매너온도 </Text>
-          </Grid>
+          <InfoGrid>
+            <Text margin="20px 20px" padding="10px" bold>
+              이름
+            </Text>
+            <input type="text" style={{ width: "250px", marginBottom: "20px" }} />
 
-          <Grid is_flex>
-            <FaRegHeart />
-            <Grid is_flex margin="0px 10px">
-              <Text>재거래희망률 -%</Text>
-              <Text>표시될 만큼 충분히 대화하지 않았어요</Text>
-            </Grid>
-          </Grid>
-          <Grid>
-            <GoComment />
-            <Text>응답률 -%</Text>
-            <Text>표시될 만큼 충분히 대화하지 않았어요</Text>
-          </Grid>
-
-          <Grid bg="#eeeeee">
-            <Text>방화동 4회 인증</Text>
-            <Text>2021년 04월 2일 가입 (최근 3일 이내 활동)</Text>
-          </Grid>
-          <Grid>
-            <Text>활동 배지 1개</Text>
-          </Grid>
-          <Grid>
-            <Text>판매상품 0개</Text>
-          </Grid>
-          <Grid>
-            <Text>동네생활</Text>
-          </Grid>
-          <Grid>
-            <Text>받은 매너 평가</Text>
+            <Text margin="10px 0" bold>
+              이메일
+            </Text>
+            <input type="email" style={{ width: "250px" }} />
+          </InfoGrid>
+          <Grid width="150px" margin="50px auto">
+            <Button>수정완료</Button>
           </Grid>
         </Grid>
       </React.Fragment>
     );
 }
+
+
+const ImgGrid = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+`;
+
+const UploadGrid = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const InfoGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+`;
 
 
 export default UserInfo;
