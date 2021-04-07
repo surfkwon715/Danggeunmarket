@@ -17,19 +17,21 @@ const Login = (props) => {
   return (
     <React.Fragment>
       <InputWrapper>
-        <Text size="20px" color= "#e67700" bold>로그인</Text>
+        <Text size="20px" color="#e67700" bold>로그인</Text>
+        <Text size="10px" color="#e67700" bold>당근마켓에 오신 것을 환영합니다!</Text>
+        
 
-        <Grid>
+        <ExtraGrid>
           <Text size="16px" color="#e67700">아이디</Text>
           <input type="text" ref={username_ref} width="100%" padding="2px 4px" box-sizing="border-box" border="1px solid #000000" />
-        </Grid>
+        </ExtraGrid>
 
-        <Grid>
+        <ExtraGrid>
           <Text size="16px" color="#e67700">비밀번호</Text>
           <input type="text" ref={password_ref} />
-        </Grid>
+        </ExtraGrid>
 
-        <Grid>
+        <ExtraGrid>
           <button
             onClick={() => {
               if (username_ref.current.value === "" || password_ref.current.value === "") {
@@ -51,9 +53,8 @@ const Login = (props) => {
           >
             로그인
           </button>
-        </Grid>
+        </ExtraGrid>
 
-        <p style={{ marginTop: "50px" }}>아직 회원이 아니신가요?</p>
         <div>
           <button onClick={() => {
             props.history.push("/signup");
@@ -71,10 +72,10 @@ const Login = (props) => {
 
 const InputWrapper = styled.div`
   width: 60vw;
-  height: auto;
+  height: 100vh;
 
   padding: 30px 16px;
-  margin: 100px auto;
+  margin: 50px auto;
 
   display: flex;
   flex-direction: column;
@@ -83,7 +84,16 @@ const InputWrapper = styled.div`
 
   box-sizing: border-box;
 
-  background-color: #ffe066;
+  background-color: #ffe3e3;
 `;
+
+const ExtraGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+`;
+
 
 export default Login;

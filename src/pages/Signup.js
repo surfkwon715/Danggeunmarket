@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { emailCheck } from "../regExp";
 import { SignupAX } from "../redux/modules/user";
+import { CheckUserName } from "../redux/modules/user";
 
 
 const Signup = (props) => {
@@ -21,6 +22,9 @@ const Signup = (props) => {
         <div>
           <p style={{ fontSize: "16px", color: "#e67700" }}>아이디</p>
           <input type="text" ref={username_ref} width="100%" padding="2px 4px" box-sizing="border-box" border="1px solid #000000" />
+          <button onClick={() => {
+            CheckUserName(username_ref.current.value)
+          }}>중복확인</button>
         </div>
 
         <div margin="10px auto">
