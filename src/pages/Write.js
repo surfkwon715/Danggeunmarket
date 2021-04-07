@@ -10,6 +10,7 @@ import Button from "../elements/Button";
 
 
 import axios from "axios";
+import { FaParachuteBox } from "react-icons/fa";
 
 
 
@@ -17,51 +18,70 @@ const Write = (props) => {
   
   const title_ref = React.useRef("안녕");
   const contents_ref = React.useRef("하이");
-  const fileInput = React.useRef(null)
-
+  const image_ref = React.useRef("그래");
+  const preview = "사진"
+  
+ 
   
   const Create =()=>{
-    axios(
+    
+    
+
+    const form = new FormData();
+    form.append('title',title_ref.current.value);
+    form.append('contents',contents_ref.current.value);
+    form.append('files',image_ref.current.files[0]);
+      console.log(title_ref.current.value)
+      console.log(contents_ref.current.value)
+      console.log(image_ref.current.files[0])
+     
+      
+     axios(
       {
         method: 'post',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
+          'Content-Type': 'multipart/form-data',
         },
         url:"http://15.165.77.77:8080/api/boards",
-        data:{
-          title: title_ref.current.value,
-          contents: contents_ref.current.value,
-        },
-      })
+        body: form,
+      }
+     )
+
+    
+    // axios.post("http://15.165.77.77:8080/api/boards",form,{
+    //       headers: {
+    //       // Accept: "application/json",
+    //        'Content-Type': 'multipart/form-data'
+    //      },
+    //     })
       .then((response)=>{
-        console.log(response.data)
+        console.log(response);
+        // console.log(snapshot);
+        // snapshot.ref.getDownloadURL().then((url)=>console.log(url))
         
       }).catch(error=>{
         console.log(error);
       })
     }
-    
-   
+
+    // const prac = () =>{
+    //   console.log(title_ref.current.value)
+    //   const form = new FormData();
+    //   form.append('title',title_ref.current.value);
+    //   console.log(form)
       
-  const ImageUp=()=>{
-      console.log(fileInput.current)}
-
+    // }
     
-   
 
-  
-
-// 이미지 업로드  const example_ref = React.useRef(null);
-// 가격도 추가
-// 완료 누르면 데이터가 서버로 넘어가도록 + 등록이 되도록
   return (
     <React.Fragment>
-
+      
       <Grid is_flex border_bottom="1px solid #e9ecef" padding="10px">
       
       <pButton onClick={()=>props.history.push("/postlist")}>
         <Text size="12px">닫기</Text></pButton>
+
+
 
       <Text bold size="20px">중고거래 글쓰기</Text>
       
@@ -70,7 +90,7 @@ const Write = (props) => {
       </Grid>
       
       <Grid border_bottom="1px solid #e9ecef" padding="30px">
-        <input type="file" ref={fileInput} onClick={()=>{ImageUp()}}></input>
+        <input type="file" ref={image_ref}/>
       </Grid>
       <Grid border_bottom="1px solid #e9ecef" padding="20px">
        <NLInput placeholder="글 제목"  width="200px" ref={title_ref}></NLInput>
@@ -89,6 +109,7 @@ const Write = (props) => {
 
        </NLInput>
       </Grid>
+      {/* <button onClick={()=>{prac()}}></button> */}
 
      
     </React.Fragment>

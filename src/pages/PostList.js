@@ -41,7 +41,8 @@ const PostList = (props) => {
   React.useEffect(()=>{Load()
   },[])
   
-  
+  console.log(ResData)
+
   
 
   return (
