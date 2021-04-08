@@ -56,7 +56,7 @@ const Post =(props)=> {
           <Button width="100px" onClick={()=>{props.history.push("/postlist")}}>뒤로가기</Button>
           </Grid>
 
-          <ItemImage padding="10px" border_radius="20px" width="400px" height="50vw" display="flex" src="https://images.unsplash.com/photo-1593643946890-b5b85ade6451?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1529&q=80"/>
+          <ItemImage padding="10px" border_radius="20px" width="400px" height="50vw" display="flex" src={data[0]?.imgFilePath}/>
           
           <Grid is_flex border_bottom="1px solid #e9ecef" >
           <TextWrap flex_direction="">
