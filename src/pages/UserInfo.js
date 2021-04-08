@@ -125,7 +125,7 @@ const UserInfo = (props) => {
                   InfoAX(username_ref, email_ref, image_ref);
                   
                   alert("프로필 수정이 완료되었습니다!");
-                  props.history.push('/mypage');
+                  props.history.push('/mypage/:username');
                 }}
               >
                 수정완료

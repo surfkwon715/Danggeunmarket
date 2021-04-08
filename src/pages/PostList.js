@@ -12,8 +12,6 @@ import {useState} from 'react'
 
 
 
-
-
 const PostList = (props) => {
   
   const initialState=[

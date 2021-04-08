@@ -4,68 +4,37 @@ import { Grid, Text, Image } from '../elements';
 import { FiSettings, FiCrosshair, FiTag, FiGrid, FiBookOpen, FiHome } from "react-icons/fi";
 import { FaRegNewspaper, FaShoppingBag, FaHeart, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { BiCommentDetail, BiBuildings, BiLocationPlus, BiChat } from "react-icons/bi";
-import { useDispatch } from 'react-redux';
-import { LogoutAX } from "../redux/modules/user";
 import axios from "axios";
 import {useState} from 'react'
-
 const MyPage = (props) => {
-  
-  const initialState = [
-      
+  const initialState=[
   ]
-
   const [user_info, setUser_info] = useState(initialState);
-  const Temp = () => {
+  const Temp =()=>{
     axios(
       {
         method: 'get',
         headers: {
-          
           'Authorization': 'Bearer' + localStorage.getItem("jwt"),
         },
-        url: "http://15.165.77.77:8080/api/profile",
-        data: {
+        url:"http://15.165.77.77:8080/api/profile",
+        data:{
         },
       })
-      .then((response) => {
-        
-        
-        const userinfo = { username: response.data.username, email: response.data.email }
+      .then((response)=>{
+        const userinfo = {username :response.data.username, email : response.data.email}
         console.log(userinfo)
         setUser_info(userinfo)
-      
-      }).catch(error => {
+      }).catch(error=>{
         console.log(error);
       })
-  }
-
-  console.log(user_info)
-  const your_id = props.match.params.username
-  console.log(your_id)
-  // const your_data = user_info.filter((item)=>{return user_info.username=== your_id})
-    
-    
-  React.useEffect(() => {
-    Temp()
-  }, [])
-
-  const MyPage = (props) => {
-    const dispatch = useDispatch();
-
-    const myPageAX = (profile_img, username, email) => {
-      return function (dispatch, getState, { history }) {
-        fetch("http://15.165.77.77:8080/api/profile", {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            Authorization: "Bearer" + localStorage.getItem("jwt"),
-          },
-        }).then((res) => {
-          console.log(res.data);
-        });
-      };
-    }
+    }              
+    console.log(user_info)
+    const your_id= props.match.params.username
+    console.log(your_id)
+    // const your_data = user_info.filter((item)=>{return user_info.username=== your_id})
+    React.useEffect(()=>{Temp()
+    },[])
     return (
       <React.Fragment>
         <Grid width="50%" margin="0px auto">
@@ -73,34 +42,19 @@ const MyPage = (props) => {
             <Text size="20px" bold>
               나의 당근
             </Text>
-            <ButtonStyle
-              style={{
-                width: "70px", margin: "0px", padding: "4px 8px"
-              }}
-              onClick={() => {
-                localStorage.removeItem("jwt");
-                props.history.replace("/");
-              }}>
-              <Text size="12px">로그아웃</Text>
-            </ButtonStyle>
+            <FiSettings size="20" />
           </Grid>
-           
           <Grid is_flex>
-            <Image src={props.profile_img} shape="circle" margin="10px" />
+            <Image shape="circle" margin="10px" />
             <Grid>
               <Text size="15px" bold>
-                {props.username}
-              </Text>
-              <Text size="11px" color="#868e96">
-                {props.email}
                 {user_info.username}
               </Text>
-              <Text size="11px" color="#868e96">
+              <Text size="11px" color="#868E96">
                 {user_info.email}
               </Text>
             </Grid>
           </Grid>
-
           <ExtraGrid>
             <ButtonStyle
               onClick={() => {
@@ -112,8 +66,7 @@ const MyPage = (props) => {
               </Text>
             </ButtonStyle>
           </ExtraGrid>
-
-          <Grid is_flex padding="10px 0 0 0" border_bottom="3px solid #eeeeee">
+          <Grid is_flex padding="10px 0 0 0" border_bottom="3px solid #EEEEEE">
             <ExtraGrid>
               <ButtonStyle
                 onClick={() => {
@@ -126,7 +79,7 @@ const MyPage = (props) => {
                     width: "45px",
                     height: "45px",
                     borderRadius: "45px",
-                    backgroundColor: "#ffe8cc",
+                    backgroundColor: "#FFE8CC",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -139,7 +92,6 @@ const MyPage = (props) => {
                 </Text>
               </ButtonStyle>
             </ExtraGrid>
-
             <ExtraGrid>
               <ButtonStyle style={{ border: "none" }}>
                 <div
@@ -147,7 +99,7 @@ const MyPage = (props) => {
                     width: "45px",
                     height: "45px",
                     borderRadius: "45px",
-                    backgroundColor: "#ffe8cc",
+                    backgroundColor: "#FFE8CC",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -155,13 +107,11 @@ const MyPage = (props) => {
                 >
                   <FaShoppingBag size="20px" />
                 </div>
-
                 <Text size="11px" margin="10px 0px">
                   구매내역
                 </Text>
               </ButtonStyle>
             </ExtraGrid>
-
             <ExtraGrid>
               <ButtonStyle style={{ border: "none" }}>
                 <div
@@ -169,7 +119,7 @@ const MyPage = (props) => {
                     width: "45px",
                     height: "45px",
                     borderRadius: "45px",
-                    backgroundColor: "#ffe8cc",
+                    backgroundColor: "#FFE8CC",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -183,7 +133,6 @@ const MyPage = (props) => {
               </ButtonStyle>
             </ExtraGrid>
           </Grid>
-
           <Grid>
             <Grid is_flex padding="20px">
               <FaMapMarkerAlt />
@@ -203,7 +152,7 @@ const MyPage = (props) => {
                 <Text size="13px">키워드 알림</Text>
               </Grid>
             </Grid>
-            <Grid is_flex padding="20px" border_bottom="3px solid #eeeeee">
+            <Grid is_flex padding="20px" border_bottom="3px solid #EEEEEE">
               <FiGrid />
               <Grid is_flex margin="0px 20px">
                 <Text size="13px">모아보기</Text>
@@ -222,9 +171,7 @@ const MyPage = (props) => {
               </Grid>
             </Grid>
           </Grid>
-
-          <div style={{ borderBottom: "2px solid #eeeeee" }}></div>
-
+          <div style={{ borderBottom: "2px solid #EEEEEE" }}></div>
           <Grid is_flex margin="10px 0px">
             <ExtraGrid>
               <ExtraGrid onClick={() => props.history.push("/")} style={{ cursor: "pointer" }}>
@@ -252,7 +199,7 @@ const MyPage = (props) => {
                 채팅
               </Text>
             </ExtraGrid>
-            <ExtraGrid onClick={() => props.history.push("/mypage")} style={{ cursor: "pointer" }}>
+            <ExtraGrid onClick={() => props.history.push("/mypage/:username")} style={{ cursor: "pointer" }}>
               <FaUser />
               <Text margin="10px" size="11px">
                 나의 당근
@@ -262,25 +209,21 @@ const MyPage = (props) => {
         </Grid>
       </React.Fragment>
     );
-  }
 }
-
 const ExtraGrid = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
-
 const ButtonStyle = styled.button`
   width: 100%;
   font-size: 11px;
-  color: #e67700;
+  color: #E67700;
   padding: 8px 20px;
   margin: 20px auto 0;
-  background-color: #ffffff;
-  border: 1px solid #ced4da;
+  background-color: #FFFFFF;
+  border: 1px solid #CED4DA;
   cursor: pointer;
   font-weight: bold;
 `;
-
 export default MyPage;
