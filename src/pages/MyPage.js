@@ -4,10 +4,37 @@ import { Grid, Text, Image } from '../elements';
 import { FiSettings, FiCrosshair, FiTag, FiGrid, FiBookOpen, FiHome } from "react-icons/fi";
 import { FaRegNewspaper, FaShoppingBag, FaHeart, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { BiCommentDetail, BiBuildings, BiLocationPlus, BiChat } from "react-icons/bi";
+import axios from "axios";
 
-
+import {useState} from 'react'
 
 const MyPage = (props) => {
+  const [user_info, setUser_info] = useState(null);
+  const Temp =()=>{
+    axios(
+      {
+        method: 'get',
+        headers: {
+          
+          'Authorization': 'Bearer' + localStorage.getItem("jwt"),
+        },
+        url:"http://15.165.77.77:8080/api/profile",
+        data:{
+        },
+      })
+      .then((response)=>{
+        console.log(response)
+        const userinfo = {username :response.data.username, email : response.data.email}
+        setUser_info(userinfo)
+      
+      }).catch(error=>{
+        console.log(error);
+      })
+    }              ///밑에 저기 뭐있던 자리ㅈㅣ....?
+
+
+    React.useEffect(()=>{Temp()
+    },[])
 
     return (
       <React.Fragment>
@@ -18,15 +45,15 @@ const MyPage = (props) => {
             </Text>
             <FiSettings size="20" />
           </Grid>
-
+           
           <Grid is_flex>
             <Image shape="circle" margin="10px" />
             <Grid>
               <Text size="15px" bold>
-                Cheryl
+                {user_info.username} 
               </Text>
               <Text size="11px" color="#868e96">
-                방화동 #0
+               {user_info.email}
               </Text>
             </Grid>
           </Grid>

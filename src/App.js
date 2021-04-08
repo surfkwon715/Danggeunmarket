@@ -28,7 +28,7 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/post" exact component={Post} />
-        <Route path="/mypage" exact component={MyPage} />
+        <Route path="/mypage/:username" exact component={MyPage} />
         <Route path="/info" exact component={UserInfo} />
 
         <Route path="/post/:id" exact component={Post} />
