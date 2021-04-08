@@ -27,10 +27,9 @@ const SellRecordHeader = (props) => {
             </Text>
           </Grid>
 
-          <Grid>
-            <Button
-              width="33.3%"
-              border="none"
+          <Grid is_flex>
+            <div
+              style={{ width: "33.3%", cursor: "pointer", textAlign: "center" }}
               onClick={() => {
                 setCategory("판매중");
                 dispatch(onSalesAX(category));
@@ -41,23 +40,37 @@ const SellRecordHeader = (props) => {
                   판매중
                 </Text>
               </Grid>
-            </Button>
+            </div>
 
-            <Button
-              width="33.3%"
-              border="none"
+            <div
+              style={{ width: "33.3%", cursor: "pointer", textAlign: "center" }}
               onClick={() => {
                 // props.history.push("/onsale");
                 setCategory("거래완료");
                 //dispatch(onSalesAX());
               }}
             >
-              <Text>거래완료</Text>
-            </Button>
+              <Grid>
+                <Text margin="5px 0 7px 0" color="#adb5bd" bold>
+                  거래완료
+                </Text>
+              </Grid>
+            </div>
 
-            <Button width="33.3%" border="none">
-              <Text>숨김</Text>
-            </Button>
+            <div
+              style={{ width: "33.3%", cursor: "pointer", textAlign: "center" }}
+              onClick={() => {
+                // props.history.push("/onsale");
+                setCategory("숨김");
+                //dispatch(onSalesAX());
+              }}
+            >
+              <Grid>
+                <Text margin="5px 0 7px 0" color="#adb5bd" bold>
+                  숨김
+                </Text>
+              </Grid>
+            </div>
           </Grid>
         </Grid>
       </React.Fragment>

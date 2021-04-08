@@ -16,27 +16,45 @@ const Login = (props) => {
   return (
     <React.Fragment>
       <InputWrapper>
-        <Text size="22px" color="#d9480f" margin="0 auto 10px" bold>
+        <Text size="22px" color="#d9480f" margin="0 auto 20px" bold>
           로그인
         </Text>
 
         <ExtraGrid>
-          <Text size="16px" color="#e67700" margin="7px 0">
-            아이디
-          </Text>
           <input
             type="text"
+            placeholder="아이디"
             ref={username_ref}
-            style={{ width: "250px", padding: "2px 4px", boxSizing: "border-box", border: "1px solid #000000" }}
+            style={{
+              width: "250px",
+              height: "40px",
+              padding: "2px 10px",
+              fontSize: "12px",
+              color: "#495057",
+              boxSizing: "border-box",
+              border: "1px solid #dee2e6",
+            }}
           />
         </ExtraGrid>
 
         <ExtraGrid>
-          <Text size="16px" color="#e67700" margin="7px 0">
-            비밀번호
-          </Text>
-          <input type="text" ref={password_ref} style={{ width: "250px" }} />
+          <input
+            type="text"
+            placeholder="비밀번호"
+            ref={password_ref}
+            style={{
+              width: "250px",
+              height: "40px",
+              padding: "2px 10px",
+              fontSize: "12px",
+              color: "#495057",
+              boxSizing: "border-box",
+              border: "1px solid #dee2e6",
+            }}
+          />
         </ExtraGrid>
+
+        <MiniText>아이디/비밀번호 찾기</MiniText>
 
         <ExtraGrid>
           <ButtonStyle
@@ -58,7 +76,7 @@ const Login = (props) => {
             onClick={() => {
               props.history.push("/signup");
             }}
-            style={{ fontSize: "14px", color: "#e67700", backgroundColor: "ivory", border: "1px solid #ffa94d" }}
+            style={{ fontSize: "12px", color: "#ffffff", backgroundColor: "#e67700", border: "none" }}
           >
             회원가입
           </ButtonStyle>
@@ -88,20 +106,28 @@ const ExtraGrid = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin: 10px 0;
 `;
 
 const ButtonStyle = styled.button`
-  font-size: 14px;
-  color: #ffffff;
+  width: 250px;
+  font-size: 12px;
+  color: #e67700;
   padding: 8px 20px;
-  margin: 20px auto 0px;
-  background-color: #e67700;
-  border: none;
-  border-radius: 10px;
+  margin: 5px auto 0px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
   cursor: pointer;
+  font-weight: bold;
 `;
 
-
+const MiniText = styled.div`
+  font-size: 11px;
+  color: #adb5bd;
+  text-decoration: underline;
+  text-align: right;
+  margin-top: 30px;
+  cursor: pointer;
+`;
 
 export default Login;

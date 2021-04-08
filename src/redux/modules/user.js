@@ -128,7 +128,7 @@ export const SignupAX = (username, password, pwcheck, email) => {
 };
 
 
-export const InfoAX = () => {
+export const InfoAX = (props) => {
   fetch('/info',{
         method: "GET",
         headers: {
@@ -140,25 +140,31 @@ export const InfoAX = () => {
 }
 
 
+// const form = new FormData();
+//     form.append('title',title_ref.current.value);
+//     form.append('contents',contents_ref.current.value);
+//     form.append('files',image_ref.current.files[0]);
 
 
-export const InfoImageAX = () => {
-  fetch("/info", {
-    method: "POST",
-    headers: {
-      "content-type": "multipart/form-data",
-      "Authorization": "Bearer " + localStorage.setItem('jwt'),
-    }
-  }).then(res => res.json())
-  .then(res => alert())
+export const InfoImageAX = (props) => {
+  return function (dispatch, getState) {
+    fetch("/info", {
+      method: "POST",
+      headers: {
+        "content-type": "multipart/form-data",
+        "Authorization": "Bearer " + localStorage.getItem('jwt'),
+      },
 
+    }).then(res => res.json())
+      .then(res =>
+        console.log("이미지 넣기!!")
+        )
+  }
   };
 
 
 
 export const CheckUserName = (username) => {
-
-console.log(username);
 
     fetch("http://15.165.77.77:8080/api/checkusername", {
       method: "POST",
@@ -206,11 +212,12 @@ export default handleActions(
   initialState
 );
 
-const ActionCreators = {
+const actionCreators = {
   loginAX,
   SignupAX,
   InfoAX,
+  InfoImageAX,
   CheckUserName,
 };
 
-export { ActionCreators };
+export { actionCreators };
