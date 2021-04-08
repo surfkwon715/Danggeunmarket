@@ -78,7 +78,7 @@ const Signup = (props) => {
               비밀번호
             </Text>
             <input
-              type="text"
+              type="password"
               ref={password_ref}
               placeholder="영문, 숫자, 특수문자를 포함하세요"
               style={{
@@ -112,7 +112,7 @@ const Signup = (props) => {
               비밀번호확인
             </Text>
             <input
-              type="text"
+              type="password"
               ref={pwd_check_ref}
               placeholder="비밀번호를 한번 더 입력하세요"
               style={{

@@ -96,6 +96,7 @@ export const SignupAX = (username, password, pwcheck, email) => {
           method: "POST",
           headers: {
             "content-type": "application/json",
+
           },
 
           body: JSON.stringify({
@@ -107,10 +108,13 @@ export const SignupAX = (username, password, pwcheck, email) => {
 
         })
           .then((res) => res.json())
-          .then((token) => {
-            localStorage.setItem("jwt", token.accessToken);
+          .then((user) => {
+            console.log(user);
             alert("회원가입 되었습니다");
-          });
+          })
+          .catch((error) => {
+            console.log(error.errorMessage);
+    })
 
     // axios
     //   .post("http://15.165.77.77:8080/api/signup", { username: username, password: password, pwcheck: pwcheck, email: email }, SellRecordHeader)
@@ -127,40 +131,6 @@ export const SignupAX = (username, password, pwcheck, email) => {
   };
 };
 
-
-export const InfoAX = (props) => {
-  fetch('/info',{
-        method: "GET",
-        headers: {
-            "content-type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem('jwt'),
-        }
-    }).then(res => res.json())
-        .then(json => alert('이름 : ' + json.name + ', 비밀번호 : ' + json.pwd))
-}
-
-
-// const form = new FormData();
-//     form.append('title',title_ref.current.value);
-//     form.append('contents',contents_ref.current.value);
-//     form.append('files',image_ref.current.files[0]);
-
-
-export const InfoImageAX = (props) => {
-  return function (dispatch, getState) {
-    fetch("/info", {
-      method: "POST",
-      headers: {
-        "content-type": "multipart/form-data",
-        "Authorization": "Bearer " + localStorage.getItem('jwt'),
-      },
-
-    }).then(res => res.json())
-      .then(res =>
-        console.log("이미지 넣기!!")
-        )
-  }
-  };
 
 
 
@@ -215,8 +185,7 @@ export default handleActions(
 const actionCreators = {
   loginAX,
   SignupAX,
-  InfoAX,
-  InfoImageAX,
+
   CheckUserName,
 };
 
