@@ -9,7 +9,12 @@ import axios from "axios";
 import {useState} from 'react'
 
 const MyPage = (props) => {
-  const [user_info, setUser_info] = useState(null);
+  
+  const initialState=[
+      
+  ]
+
+  const [user_info, setUser_info] = useState(initialState);
   const Temp =()=>{
     axios(
       {
@@ -23,16 +28,23 @@ const MyPage = (props) => {
         },
       })
       .then((response)=>{
-        console.log(response)
+        
+        
         const userinfo = {username :response.data.username, email : response.data.email}
+        console.log(userinfo)
         setUser_info(userinfo)
       
       }).catch(error=>{
         console.log(error);
       })
-    }              ///밑에 저기 뭐있던 자리ㅈㅣ....?
+    }              
 
-
+    console.log(user_info)
+    const your_id= props.match.params.username
+    console.log(your_id)
+    // const your_data = user_info.filter((item)=>{return user_info.username=== your_id})
+    
+    
     React.useEffect(()=>{Temp()
     },[])
 
@@ -50,10 +62,10 @@ const MyPage = (props) => {
             <Image shape="circle" margin="10px" />
             <Grid>
               <Text size="15px" bold>
-                {user_info.username} 
+               {user_info.username} 
               </Text>
               <Text size="11px" color="#868e96">
-               {user_info.email}
+             {user_info.email}
               </Text>
             </Grid>
           </Grid>

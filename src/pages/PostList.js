@@ -21,7 +21,7 @@ const PostList = (props) => {
   ]
 
   const [ResData, setData] = useState(initialState);
-  const [ResUser, setUser] = useState(null);
+  const [ResUser, setUser] = useState("djfkj");
   
   const Load =()=>{
     axios(
@@ -103,10 +103,10 @@ const PostList = (props) => {
                 <TextWrap padding="8px" flex_direction="row">
                 <Image border_radius="10px"size= {70} shape="logo"/>
                 <Grid margin="0px 0px 0px 20px">
-                <Text bold>{item.title}</Text>
-                <Text>{item.contents}</Text>
-                <Text>{item.price}</Text>
-                <Text>{item.username}</Text>
+                <Text bold size={10}>{item.title}</Text>
+                <Text size={10}>{item.contents}</Text>
+                <Text size={10}>{item.price}</Text>
+                <Text size={10}>{item.username}</Text>
                 </Grid>
                 </TextWrap>
 
@@ -150,7 +150,7 @@ const PostList = (props) => {
          
           
         
-        <ExtraGrid onClick={()=>{props.history.push("/mypage/"+ResUser) } } //이부분 테스트해봐야함
+        <ExtraGrid onClick={()=>{props.history.push("/mypage/"+ResUser) } } 
         padding="20px 20px 0px">
             <FiUser />
             <Text margin="10px" size="12px">

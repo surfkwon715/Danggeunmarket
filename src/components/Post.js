@@ -42,13 +42,15 @@ const Post =(props)=> {
       console.log(ResData)
       const myid= props.match.params.id
       console.log(myid)
- 
+
+      const data = ResData.filter((item)=>{return item.id === parseInt(myid)})
+      console.log(data)
+
+
     return( 
-      
+
       <Grid width="50%" margin="0px auto">
-      {ResData.filter((item)=>{
-        if(item.id===myid){
-          return (
+      
           <Grid>
           <Grid>
           <Button width="100px" onClick={()=>{props.history.push("/postlist")}}>뒤로가기</Button>
@@ -61,21 +63,20 @@ const Post =(props)=> {
           <Image size={40} margin="8px 4px 8px 4px" />
 
           <TextWrap padding="8px" flex_direction="column">
-          <Text left bold color="black" size="15px">{ResData.data.username}</Text>
-          <Text left color="grey" size="1px">{ResData.data.email}</Text>
+          <Text left bold color="black" size="15px">{data[0]?.username}</Text>
+          <Text left color="grey" size="1px">주소</Text>
           </TextWrap>
           </TextWrap>
           <Text color="grey" size="1px">매너온도</Text>
           </Grid>
 
-          <p><Text left bold size="18px">안녕하세요 타이틀입니다</Text></p>
+          <p><Text left bold size="18px">{data[0]?.title}</Text></p>
           <p><Text left size="1px" color="grey">가구/인테리어 14시간전</Text></p>
-          <p><Text left bold size="8px">15,000원</Text></p>
-          <p><Text left size="8px">안녕하세요 콘텐츠입니다</Text></p>
+          <p><Text left bold size="8px">{data[0]?.price}</Text></p>
+          <p><Text left size="8px">{data[0]?.contents}</Text></p>
           </Grid>
           
-        )}
-      })}
+     
        </Grid>
     )
 }
