@@ -50,8 +50,8 @@ const PostList = (props) => {
     };
 
     
-//   React.useEffect(()=>{Searching()}
-//   ,[])
+  React.useEffect(()=>{Searching()}
+  ,[])
   
   
  //두번 눌러야된다 함수사이클이랑 useEffect이해 
@@ -83,12 +83,11 @@ const PostList = (props) => {
                 
                 <Grid   border_bottom="1px solid #e9ecef">
                 <TextWrap padding="8px" flex_direction="row">
-                <Image border_radius="10px"size= {70} shape="logo"/>
+                <Image src ={item.imgFilePath} border_radius="10px"size= {70} shape="logo"/>
                 <Grid margin="0px 0px 0px 20px">
                 <Text bold>{item.title}</Text>
-                <Text>{item.contents}</Text>
                 <Text>{item.price}</Text>
-                <Text>{item.username}</Text>
+                
                 </Grid>
                 </TextWrap>
 

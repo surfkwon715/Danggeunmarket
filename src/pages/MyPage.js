@@ -174,7 +174,7 @@ const MyPage = (props) => {
           <div style={{ borderBottom: "2px solid #EEEEEE" }}></div>
           <Grid is_flex margin="10px 0px">
             <ExtraGrid>
-              <ExtraGrid onClick={() => props.history.push("/")} style={{ cursor: "pointer" }}>
+              <ExtraGrid onClick={() => props.history.push("/postlist")} style={{ cursor: "pointer" }}>
                 <FiHome />
                 <Text margin="10px" size="11px">
                   홈
