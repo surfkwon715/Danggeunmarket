@@ -20,7 +20,7 @@ const PostList = (props) => {
     const text= _search.current.value;
 
   const initialState=[
-    {id:1, title:"귀염", contents:"뽀짝이"}
+    {id:1, title:"당근마켓", contents:"광고"}
   ]
 
   const [ResData, setData] = useState(initialState);

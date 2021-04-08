@@ -1,16 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
-import { useDispatch } from "react-redux";
-import { addItemSV } from "../redux/modules/item";
 import Grid from "../elements/Grid";
-import Image from "../elements/Image";
 import Text from "../elements/Text";
-import Button from "../elements/Button";
-
-
 import axios from "axios";
-import { FaParachuteBox } from "react-icons/fa";
+
 
 
 
@@ -19,7 +12,7 @@ const Write = (props) => {
   const title_ref = React.useRef("안녕");
   const contents_ref = React.useRef("하이");
   const image_ref = React.useRef("그래");
-  const preview = "사진"
+  
   
  
   
@@ -31,9 +24,12 @@ const Write = (props) => {
     form.append('title',title_ref.current.value);
     form.append('contents',contents_ref.current.value);
     form.append('files',image_ref.current.files[0]);
-      console.log(title_ref.current.value)
-      console.log(contents_ref.current.value)
-      console.log(image_ref.current.files[0])
+      // console.log(title_ref.current.value)
+      // console.log(contents_ref.current.value)
+      // console.log(image_ref.current.files[0].name)
+      // for(var key of form.keys()){
+      //   console.log(key);
+      // }
      
       
      axios(
@@ -41,36 +37,27 @@ const Write = (props) => {
         method: 'post',
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer' + localStorage.getItem("jwt"),
         },
         url:"http://15.165.77.77:8080/api/boards",
-        body: form,
+        data: form
       }
      )
 
     
-    // axios.post("http://15.165.77.77:8080/api/boards",form,{
-    //       headers: {
-    //       // Accept: "application/json",
-    //        'Content-Type': 'multipart/form-data'
-    //      },
-    //     })
+  
       .then((response)=>{
         console.log(response);
-        // console.log(snapshot);
-        // snapshot.ref.getDownloadURL().then((url)=>console.log(url))
+
         
       }).catch(error=>{
         console.log(error);
       })
+
+      props.history.push("/postlist")
     }
 
-    // const prac = () =>{
-    //   console.log(title_ref.current.value)
-    //   const form = new FormData();
-    //   form.append('title',title_ref.current.value);
-    //   console.log(form)
-      
-    // }
+   
     
 
   return (
@@ -109,7 +96,7 @@ const Write = (props) => {
 
        </NLInput>
       </Grid>
-      {/* <button onClick={()=>{prac()}}></button> */}
+    
 
      
     </React.Fragment>

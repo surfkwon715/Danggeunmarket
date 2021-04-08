@@ -1,3 +1,9 @@
+
+
+
+
+
+
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,7 +24,7 @@ import {useState} from 'react'
 const PostList = (props) => {
   
   const initialState=[
-    {id:1, title:"귀염", contents:"뽀짝이"}
+    {id:1, title:"당근마켓", contents:"광고"}
   ]
 
   const [ResData, setData] = useState(initialState);
