@@ -13,7 +13,7 @@ import {useState} from 'react'
 const Post =(props)=> {
 
     const initialState=[
-        {id:1, title:"당근마켓", contents:"광고",price: "30000",username:"하이"}
+      
       ]
     
       const [ResData, setData] = useState(initialState);
@@ -22,7 +22,7 @@ const Post =(props)=> {
           {
             method: 'get',
             headers: {
-              'Content-Type': 'multipart/form-data',
+             
               'Authorization': 'Bearer' + localStorage.getItem("jwt"),
             },
             url:"http://15.165.77.77:8080/api/boards",
@@ -30,70 +30,56 @@ const Post =(props)=> {
             },
           })
           .then((response)=>{
-            console.log(response.data)
+           
             setData(response.data);
           }).catch(error=>{
             console.log(error);
           })
         }
-    
+
       React.useEffect(()=>{Load()
       },[])
       console.log(ResData)
-      console.log(props.match.params.id)
-    // 해당주소로 들어가게되면 해당하는 화면 보여주기
+      const myid= props.match.params.id
+      console.log(myid)
+
+      const data = ResData.filter((item)=>{return item.id === parseInt(myid)})
+      console.log(data)
+
+
     return( 
-       
-        <React.Fragment>
-             
-            <Grid width="50%" margin="0px auto">
-            <Grid>
-            <Button width="100px" onClick={()=>{props.history.push("/postlist")}}>뒤로가기</Button>
-            </Grid>
-            
-            
-            <ItemImage padding="10px" border_radius="20px" width="400px" height="50vw" display="flex" src="https://images.unsplash.com/photo-1593643946890-b5b85ade6451?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1529&q=80"/>
-            
-            <Grid is_flex border_bottom="1px solid #e9ecef" >
-            <TextWrap flex_direction="">
-            <Image size={40} margin="8px 4px 8px 4px" />
 
-            <TextWrap padding="8px" flex_direction="column">
-            <Text left bold color="black" size="15px">아랑전설</Text>
-            <Text left color="grey" size="1px">서초구 반포1동</Text>
-            </TextWrap>
-            </TextWrap>
-            <Text color="grey" size="1px">매너온도</Text>
-            </Grid>
-            <p><Text left bold size="18px">안녕하세요 타이틀입니다</Text></p>
-            <p><Text left size="1px" color="grey">가구/인테리어 14시간전</Text></p>
-            <p><Text left bold size="8px">15,000원</Text></p>
-            <p><Text left size="8px">안녕하세요 콘텐츠입니다</Text></p>
+      <Grid width="50%" margin="0px auto">
+      
+          <Grid>
+          <Grid>
+          <Button width="100px" onClick={()=>{props.history.push("/postlist")}}>뒤로가기</Button>
+          </Grid>
 
-            
-            
+          <ItemImage padding="10px" border_radius="20px" width="400px" height="50vw" display="flex" src="https://images.unsplash.com/photo-1593643946890-b5b85ade6451?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1529&q=80"/>
+          
+          <Grid is_flex border_bottom="1px solid #e9ecef" >
+          <TextWrap flex_direction="">
+          <Image size={40} margin="8px 4px 8px 4px" />
 
-           
-            
+          <TextWrap padding="8px" flex_direction="column">
+          <Text left bold color="black" size="15px">{data[0]?.username}</Text>
+          <Text left color="grey" size="1px">주소</Text>
+          </TextWrap>
+          </TextWrap>
+          <Text color="grey" size="1px">매너온도</Text>
+          </Grid>
 
-            </Grid>
-        </React.Fragment>
+          <p><Text left bold size="18px">{data[0]?.title}</Text></p>
+          <p><Text left size="1px" color="grey">가구/인테리어 14시간전</Text></p>
+          <p><Text left bold size="8px">{data[0]?.price}</Text></p>
+          <p><Text left size="8px">{data[0]?.contents}</Text></p>
+          </Grid>
+          
+     
+       </Grid>
     )
 }
-
-// const Container= styled.div`
-//     width: ${(props)=>props.width};
-//     height:${(props)=>props.height};
-//     background-color: white;
-//     color: #ffffff;
-//     padding:${(props)=>props.padding};
-//     box-sizing: border-box;
-//     border: none;
-//     text-align: center;
-    
-//     margin: auto;
-//     ${(props)=>(props.margin? `margin:${props.margin};`:'')}
-// `;
 
 const ItemImage= styled.img`
     width: ${(props)=>props.width};

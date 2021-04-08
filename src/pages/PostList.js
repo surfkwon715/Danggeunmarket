@@ -1,9 +1,6 @@
 
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-
-import { getItemListSV } from "../redux/modules/item";
 import Image from "../elements/Image";
 import { FiHome,FiSearch,FiUser} from "react-icons/fi";
 import { FaHome } from "react-icons/fa";
@@ -24,30 +21,55 @@ const PostList = (props) => {
   ]
 
   const [ResData, setData] = useState(initialState);
+  const [ResUser, setUser] = useState("djfkj");
+  
   const Load =()=>{
     axios(
       {
         method: 'get',
         headers: {
-          'Content-Type': 'multipart/form-data',
+          
           'Authorization': 'Bearer' + localStorage.getItem("jwt"),
         },
         url:"http://15.165.77.77:8080/api/boards",
         data:{
-        },
+        }
       })
       .then((response)=>{
-        console.log(response.data)
-        setData(response.data);
+       
+        setData(response.data); 
       }).catch(error=>{
         console.log(error);
       })
     }
 
+    
+  const User =()=>{
+    axios(
+      {
+        method: 'get',
+        headers: {
+          
+          'Authorization': 'Bearer' + localStorage.getItem("jwt"),
+        },
+        url:"http://15.165.77.77:8080/api/profile",
+        data:{
+        },
+      })
+      .then((response)=>{
+        
+        setUser(response.data.username)
+      }).catch(error=>{
+        console.log(error);
+      })
+    }
+
+
   React.useEffect(()=>{Load()
   },[])
-  
-  // console.log(ResData)
+  React.useEffect(()=>{User()
+  },[])
+  console.log(ResUser)
 
   
 
@@ -55,7 +77,7 @@ const PostList = (props) => {
     
    
     <Grid width="50%" margin="0px auto">
-      
+       
        <TextWrap padding="8px" flex_direction="row">
         
        <ExtraGrid onClick={()=>{props.history.push("/search")}}>
@@ -81,10 +103,10 @@ const PostList = (props) => {
                 <TextWrap padding="8px" flex_direction="row">
                 <Image border_radius="10px"size= {70} shape="logo"/>
                 <Grid margin="0px 0px 0px 20px">
-                <Text bold>{item.title}</Text>
-                <Text>{item.contents}</Text>
-                <Text>{item.price}</Text>
-                <Text>{item.username}</Text>
+                <Text bold size={10}>{item.title}</Text>
+                <Text size={10}>{item.contents}</Text>
+                <Text size={10}>{item.price}</Text>
+                <Text size={10}>{item.username}</Text>
                 </Grid>
                 </TextWrap>
 
@@ -125,13 +147,11 @@ const PostList = (props) => {
               채팅
             </Text>
           </ExtraGrid>
+         
           
-        <ExtraGrid onClick={() => {
-          
-          props.history.push("/mypage"
-          
-          )
-        }} padding="20px 20px 0px">
+        
+        <ExtraGrid onClick={()=>{props.history.push("/mypage/"+ResUser) } } 
+        padding="20px 20px 0px">
             <FiUser />
             <Text margin="10px" size="12px">
               나의 당근
