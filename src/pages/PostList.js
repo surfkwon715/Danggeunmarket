@@ -1,9 +1,4 @@
 
-
-
-
-
-
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,10 +16,11 @@ import {useState} from 'react'
 
 
 
+
 const PostList = (props) => {
   
   const initialState=[
-    {id:1, title:"당근마켓", contents:"광고"}
+    {id:1, title:"당근마켓", contents:"광고",price: "30000",username:"하이"}
   ]
 
   const [ResData, setData] = useState(initialState);
@@ -32,6 +28,10 @@ const PostList = (props) => {
     axios(
       {
         method: 'get',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer' + localStorage.getItem("jwt"),
+        },
         url:"http://15.165.77.77:8080/api/boards",
         data:{
         },
@@ -47,7 +47,7 @@ const PostList = (props) => {
   React.useEffect(()=>{Load()
   },[])
   
-  console.log(ResData)
+  // console.log(ResData)
 
   
 
@@ -55,7 +55,9 @@ const PostList = (props) => {
     
    
     <Grid width="50%" margin="0px auto">
+      
        <TextWrap padding="8px" flex_direction="row">
+        
        <ExtraGrid onClick={()=>{props.history.push("/search")}}>
         <FiSearch />
         </ExtraGrid>
@@ -81,6 +83,8 @@ const PostList = (props) => {
                 <Grid margin="0px 0px 0px 20px">
                 <Text bold>{item.title}</Text>
                 <Text>{item.contents}</Text>
+                <Text>{item.price}</Text>
+                <Text>{item.username}</Text>
                 </Grid>
                 </TextWrap>
 

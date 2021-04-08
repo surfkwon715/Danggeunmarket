@@ -12,12 +12,40 @@ import {useState} from 'react'
 
 const Post =(props)=> {
 
-  
+    const initialState=[
+        {id:1, title:"당근마켓", contents:"광고",price: "30000",username:"하이"}
+      ]
+    
+      const [ResData, setData] = useState(initialState);
+      const Load =()=>{
+        axios(
+          {
+            method: 'get',
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': 'Bearer' + localStorage.getItem("jwt"),
+            },
+            url:"http://15.165.77.77:8080/api/boards",
+            data:{
+            },
+          })
+          .then((response)=>{
+            console.log(response.data)
+            setData(response.data);
+          }).catch(error=>{
+            console.log(error);
+          })
+        }
+    
+      React.useEffect(()=>{Load()
+      },[])
+      console.log(ResData)
+      console.log(props.match.params.id)
     // 해당주소로 들어가게되면 해당하는 화면 보여주기
     return( 
-        
+       
         <React.Fragment>
-            
+             
             <Grid width="50%" margin="0px auto">
             <Grid>
             <Button width="100px" onClick={()=>{props.history.push("/postlist")}}>뒤로가기</Button>

@@ -20,7 +20,7 @@ const PostList = (props) => {
     const text= _search.current.value;
 
   const initialState=[
-    {id:1, title:"당근마켓", contents:"광고"}
+    {id:1, title:"당근마켓", contents:"광고",price: "30000",username:"하이"}
   ]
 
   const [ResData, setData] = useState(initialState);
@@ -32,8 +32,9 @@ const PostList = (props) => {
       {
         method: 'get',
         headers: {
-            Accept: "application/json",
+            Accept: "application/json", //혹시 문제가 된다면 이거 수정
             "Content-Type": "application/json;charset=UTF-8",
+            'Authorization': 'Bearer' + localStorage.getItem("jwt"),
           },
         url:"http://15.165.77.77:8080/api/boards/search?text="+text,
         data:{
@@ -86,6 +87,8 @@ const PostList = (props) => {
                 <Grid margin="0px 0px 0px 20px">
                 <Text bold>{item.title}</Text>
                 <Text>{item.contents}</Text>
+                <Text>{item.price}</Text>
+                <Text>{item.username}</Text>
                 </Grid>
                 </TextWrap>
 
