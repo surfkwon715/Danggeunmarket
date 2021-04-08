@@ -116,7 +116,12 @@ const PostList = (props) => {
             </Text>
           </ExtraGrid>
           
-          <ExtraGrid onClick={()=>{props.history.push("/mypage")}}  padding= "20px 20px 0px">
+        <ExtraGrid onClick={() => {
+          
+          props.history.push("/mypage"
+          
+          )
+        }} padding="20px 20px 0px">
             <FiUser />
             <Text margin="10px" size="12px">
               나의 당근

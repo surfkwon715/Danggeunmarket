@@ -39,7 +39,7 @@ const Login = (props) => {
 
         <ExtraGrid>
           <input
-            type="text"
+            type="password"
             placeholder="비밀번호"
             ref={password_ref}
             style={{
@@ -63,7 +63,12 @@ const Login = (props) => {
                 window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
                 return;
               }
+              if (username_ref.current.value === "" || password_ref.current.value === "") {
+                window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
+                return;
+              }
               dispatch(loginAX(username_ref.current.value, password_ref.current.value));
+              alert("로그인 되었습니다")
               props.history.push("/postlist");
             }}
           >
