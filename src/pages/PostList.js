@@ -101,12 +101,12 @@ const PostList = (props) => {
                 
                 <Grid   border_bottom="1px solid #e9ecef">
                 <TextWrap padding="8px" flex_direction="row">
-                <Image border_radius="10px"size= {70} shape="logo"/>
+                <Image src ={item.imgFilePath} border_radius="10px"size= {100} shape="logo"/>
                 <Grid margin="0px 0px 0px 20px">
-                <Text bold size={10}>{item.title}</Text>
-                <Text size={10}>{item.contents}</Text>
-                <Text size={10}>{item.price}</Text>
-                <Text size={10}>{item.username}</Text>
+                <Text bold size="20px">{item.title}</Text>
+                
+                <Text bold size={5}>{item.price}</Text>
+               
                 </Grid>
                 </TextWrap>
 

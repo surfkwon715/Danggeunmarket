@@ -195,7 +195,7 @@ const MyPage = (props) => {
 
           <Grid is_flex margin="10px 0px">
             <ExtraGrid>
-              <ExtraGrid onClick={() => props.history.push("/")} style={{ cursor: "pointer" }}>
+              <ExtraGrid onClick={() => props.history.push("/postlist")} style={{ cursor: "pointer" }}>
                 <FiHome />
                 <Text margin="10px" size="11px">
                   홈

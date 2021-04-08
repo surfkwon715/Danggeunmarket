@@ -64,7 +64,7 @@ const Post =(props)=> {
 
           <TextWrap padding="8px" flex_direction="column">
           <Text left bold color="black" size="15px">{data[0]?.username}</Text>
-          <Text left color="grey" size="1px">주소</Text>
+          <Text left color="grey" size="1px">사당동</Text>
           </TextWrap>
           </TextWrap>
           <Text color="grey" size="1px">매너온도</Text>

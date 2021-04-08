@@ -34,7 +34,7 @@ const Write = (props) => {
           'Authorization': 'Bearer' + localStorage.getItem("jwt"),
         },
         url:"http://15.165.77.77:8080/api/boards",
-        data: form,
+        data: form
       }
       )
       .then((response)=>{
