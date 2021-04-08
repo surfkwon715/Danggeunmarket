@@ -45,16 +45,10 @@ const Write = (props) => {
      )
 
     
-    // axios.post("http://15.165.77.77:8080/api/boards",form,{
-    //       headers: {
-    //       // Accept: "application/json",
-    //        'Content-Type': 'multipart/form-data'
-    //      },
-    //     })
+  
       .then((response)=>{
         console.log(response);
-        // console.log(snapshot);
-        // snapshot.ref.getDownloadURL().then((url)=>console.log(url))
+
         
       }).catch(error=>{
         console.log(error);
