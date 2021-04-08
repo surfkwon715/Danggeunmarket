@@ -49,7 +49,6 @@ form.append("image", image_ref.current.files[0]);
 
   if (!fileUrl) {
     //프로필 기본이미지로
-    console.log("이미지??");
     setFileUrl(defaultImg);
     return;
   }

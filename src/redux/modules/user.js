@@ -46,7 +46,10 @@ export const loginAX = (username, password) => {
         console.log(token);
         localStorage.setItem("jwt", token.accessToken);
         // alert("로그인 되었습니다");
-      });
+      })
+      .catch((error) => {
+        alert(error.errorMessage);
+    })
 
 
 

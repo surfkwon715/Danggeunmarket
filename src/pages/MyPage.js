@@ -9,6 +9,24 @@ import { BiCommentDetail, BiBuildings, BiLocationPlus, BiChat } from "react-icon
 
 const MyPage = (props) => {
 
+
+  const myPageAX = (username, email) => {
+    return function (dispatch, getState) {
+
+      fetch("http://15.165.77.77:8080/api/profile", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer' + localStorage.getItem("jwt"),
+        },
+      })
+        .then((res) => {
+          console.log(res.data)
+        }
+        )
+
+    }
+  }
     return (
       <React.Fragment>
         <Grid width="50%" margin="0px auto">
@@ -23,10 +41,10 @@ const MyPage = (props) => {
             <Image shape="circle" margin="10px" />
             <Grid>
               <Text size="15px" bold>
-                Cheryl
+                {props.username}
               </Text>
               <Text size="11px" color="#868e96">
-                방화동 #0
+                {props.email}
               </Text>
             </Grid>
           </Grid>
@@ -210,7 +228,5 @@ const ButtonStyle = styled.button`
   cursor: pointer;
   font-weight: bold;
 `;
-
-
 
 export default MyPage;
