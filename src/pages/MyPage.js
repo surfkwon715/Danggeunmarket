@@ -4,28 +4,27 @@ import { Grid, Text, Image } from '../elements';
 import { FiSettings, FiCrosshair, FiTag, FiGrid, FiBookOpen, FiHome } from "react-icons/fi";
 import { FaRegNewspaper, FaShoppingBag, FaHeart, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { BiCommentDetail, BiBuildings, BiLocationPlus, BiChat } from "react-icons/bi";
+import { useDispatch } from 'react-redux';
+import { LogoutAX } from "../redux/modules/user";
+
 
 
 
 const MyPage = (props) => {
+  const dispatch = useDispatch();
 
-
-  const myPageAX = (username, email) => {
-    return function (dispatch, getState) {
-
+  const myPageAX = (profile_img, username, email) => {
+    return function (dispatch, getState, { history }) {
       fetch("http://15.165.77.77:8080/api/profile", {
         method: "GET",
         headers: {
           "content-type": "application/json",
-          'Authorization': 'Bearer' + localStorage.getItem("jwt"),
+          Authorization: "Bearer" + localStorage.getItem("jwt"),
         },
-      })
-        .then((res) => {
-          console.log(res.data)
-        }
-        )
-
-    }
+      }).then((res) => {
+        console.log(res.data);
+      });
+    };
   }
     return (
       <React.Fragment>
@@ -34,11 +33,20 @@ const MyPage = (props) => {
             <Text size="20px" bold>
               나의 당근
             </Text>
-            <FiSettings size="20" />
+            <ButtonStyle
+              style={{
+                width: "70px", margin: "0px", padding: "4px 8px"
+              }}
+              onClick={() => {
+                  localStorage.removeItem("jwt");
+                  props.history.replace("/");
+            }}>
+              <Text size="12px">로그아웃</Text>
+            </ButtonStyle>
           </Grid>
 
           <Grid is_flex>
-            <Image shape="circle" margin="10px" />
+            <Image src={props.profile_img} shape="circle" margin="10px" />
             <Grid>
               <Text size="15px" bold>
                 {props.username}
@@ -61,13 +69,14 @@ const MyPage = (props) => {
             </ButtonStyle>
           </ExtraGrid>
 
-          <Grid
-            is_flex
-            padding="10px 0 0 0"
-            border_bottom="3px solid #eeeeee"
-          >
+          <Grid is_flex padding="10px 0 0 0" border_bottom="3px solid #eeeeee">
             <ExtraGrid>
-              <ButtonStyle onClick={() => {props.history.push("/sellrecord");}} style={{ border: "none" }}>
+              <ButtonStyle
+                onClick={() => {
+                  props.history.push("/sellrecord");
+                }}
+                style={{ border: "none" }}
+              >
                 <div
                   style={{
                     width: "45px",

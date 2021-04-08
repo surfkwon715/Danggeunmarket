@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useDispatch } from 'react-redux';
 import Signup from "./Signup";
 import { loginAX } from "../redux/modules/user";
-
 import { Grid, Text } from '../elements';
 
 
@@ -54,19 +53,16 @@ const Login = (props) => {
           />
         </ExtraGrid>
 
-        <MiniText>아이디/비밀번호 찾기</MiniText>
+        <MiniText onClick={() => {
+          props.history.push("/findidpw");
+        }}>
+          아이디/비밀번호 찾기
+          </MiniText>
 
         <ExtraGrid>
           <ButtonStyle
             onClick={() => {
-              if (username_ref.current.value === "" || password_ref.current.value === "") {
-                window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
-                return;
-              }
-              if (username_ref.current.value === "" || password_ref.current.value === "") {
-                window.alert("아이디, 패스워드, 닉네임을 모두 입력해주세요!");
-                return;
-              }
+
               dispatch(loginAX(username_ref.current.value, password_ref.current.value));
               alert("로그인 되었습니다")
               props.history.push("/postlist");
@@ -127,8 +123,8 @@ const ButtonStyle = styled.button`
 `;
 
 const MiniText = styled.div`
-  font-size: 11px;
-  color: #adb5bd;
+  font-size: 12px;
+  color: #868e96;
   text-decoration: underline;
   text-align: right;
   margin-top: 30px;

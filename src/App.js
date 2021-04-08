@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
+import FindIdPw from './pages/FindIdPw';
 
 import Signup from './pages/Signup';
 import Post from './components/Post';
@@ -26,6 +27,7 @@ function App() {
     <React.Fragment>
       <BrowserRouter>
         <Route path="/" exact component={Login} />
+        <Route path="/findidpw" exact component={FindIdPw}/>
         <Route path="/signup" exact component={Signup} />
         <Route path="/post" exact component={Post} />
         <Route path="/mypage" exact component={MyPage} />

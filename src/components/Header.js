@@ -7,6 +7,7 @@ import { onSalesAX } from "../redux/modules/product";
 
 const SellRecordHeader = (props) => {
 
+
   const [category, setCategory] = React.useState("판매중");
 
   const dispatch = useDispatch();
@@ -15,13 +16,11 @@ const SellRecordHeader = (props) => {
       <React.Fragment>
         <Grid width="50%" margin="0px auto">
           <Grid is_flex margin="20px 0px">
-            <BiArrowBack
-              size="30px"
-              width="50px"
-              onClick={() => {
-                props.history.goBack();
-              }}
-            />
+              <BiArrowBack
+                size="30px"
+                width="50px"
+                onPress={() => props.history.goBack()}
+              />
             <Text size="15px" margin="0px" bold>
               판매내역
             </Text>

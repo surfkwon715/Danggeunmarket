@@ -15,29 +15,36 @@ const UserInfo = (props) => {
   const email_ref = useRef("yena77@naver.com");
   const image_ref = useRef("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGHWytpUDq5jaDNTJYRvqPAhWmnZtb5TKBiw&usqp=CAU");
 
-
-
   
-const InfoAX = () => {
+  const InfoAX = (username, email, image) => {
 
-const form = new FormData();
-form.append("username", username_ref.current.value);
-form.append("email", email_ref.current.value);
-form.append("image", image_ref.current.files[0]);
+    const form = new FormData();
+    form.append("username", username);
+    form.append("email", email);
+    form.append("profile_img", image);
 
-    fetch("/info", {
+    fetch("http://15.165.77.77:8080/api/profile/update", {
       method: "POST",
       headers: {
-        "content-type": "multipart/form-data",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "content-type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("jwt"),
       },
       body: form,
     })
-      .then((res) => console.log("프로필 수정!!"))
-      .catch((e) => {
-        console.log(e);
+      .then((res) => res.json())
+      .then((user) => {
+        console.log("프로필 수정!!");
+        console.log(user);
+        const username = user.data.username;
+        const email = user.data.email;
+        const image = user.data.profile_img;
+        console.log(username, email, image);
+        props.history.push("/mypage");
+      })
+      .catch((error) => {
+        console.log(error.errorMessage);
       });
-    props.history.push("/postlist");
+    
 };
 
 
@@ -115,7 +122,8 @@ form.append("image", image_ref.current.files[0]);
               <ButtonStyle
                 style={{ cursor: "pointer" }}
                 onClick={() => {
-                  InfoAX();
+                  InfoAX(username_ref, email_ref, image_ref);
+                  
                   alert("프로필 수정이 완료되었습니다!");
                   props.history.push('/mypage');
                 }}
