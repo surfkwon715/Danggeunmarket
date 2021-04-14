@@ -3,13 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDmZu5j8SnhgnB8YofpErLJXa0fxdRycDY",
-    authDomain: "clone-danggeun.firebaseapp.com",
-    projectId: "clone-danggeun",
-    storageBucket: "clone-danggeun.appspot.com",
-    messagingSenderId: "37870193688",
-    appId: "1:37870193688:web:e2573cc220c606555e076d",
-    measurementId: "G-Q5XM6T2H79"
+    //firebase api key 자리 (깃허브 공개문제로 지움)
 };
 
 firebase.initializeApp(firebaseConfig);
